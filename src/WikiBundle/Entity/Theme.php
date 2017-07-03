@@ -30,11 +30,6 @@ class Theme {
      */
     private $user;
     
-    /**
-     * @ORM\ManyToMany(targetEntity="Article", inversedBy="themes", cascade={"persist", "merge"})
-     * @Type("ArrayCollection<AppBundle\Entity\Article>")
-     */
-    private $articles;
     
     //GETTERS
     function getNom() {
@@ -45,9 +40,6 @@ class Theme {
         return $this->user;
     }
 
-    function getArticles() {
-        return $this->articles;
-    }
 
     //SETTERS
     function setNom($nom) {
@@ -58,9 +50,6 @@ class Theme {
         $this->user = $user;
     }
 
-    function setArticles($articles) {
-        $this->articles = $articles;
-    }
 
 
 }
