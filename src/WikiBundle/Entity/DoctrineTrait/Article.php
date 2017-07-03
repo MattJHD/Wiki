@@ -49,7 +49,6 @@ class Article {
     /**
      * @var null|string
      * @ORM\Column(nullable=true)
-     * @Assert\Length(max=255)
      */
     private $path;
     
