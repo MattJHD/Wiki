@@ -1,3 +1,4 @@
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+wiki:
+    resource: "@WikiBundle/Controller/"
+    type:     annotation
+    prefix:   /
