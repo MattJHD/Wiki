@@ -67,7 +67,7 @@ class User
 
     /**
      * @ORM\ManyToOne(targetEntity="Role", inversedBy="users", cascade={"persist", "remove", "merge"})
-     * @Type("AppBundle\Entity\User")
+     * @Type("WikiBundle\Entity\User")
      */
     private $role;
 
