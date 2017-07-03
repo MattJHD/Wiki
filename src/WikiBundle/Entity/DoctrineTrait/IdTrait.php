@@ -3,6 +3,7 @@
 namespace WikiBundle\Entity\DoctrineTrait;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Type;
 
 /**
  * Class IdTrait
@@ -16,6 +17,7 @@ trait IdTrait
      * @ORM\Id()
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Type("string")
      */
     private $id;
 

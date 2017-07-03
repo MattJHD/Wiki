@@ -35,4 +35,21 @@ class ThemeController extends Controller{
 
         return new Response($data);
     }
+
+    /**
+   * @Route("/themes/{id}", requirements={"id":"\d+"})
+   * @Method("GET")
+   */
+  public function getThemeAction($id){
+      $serializer = SerializerBuilder::create()->build();
+      $em = $this->getDoctrine()->getManager();
+      $theme = $em->getRepository(Theme::class)->getOneTheme($id);
+      if(empty($theme))
+      {
+          return new JsonResponse(['message' => 'Theme not found'], Response::HTTP_NOT_FOUND);
+      }
+      $data = $serializer->serialize($theme, 'json');
+
+      return new Response($data);
+  }
 }

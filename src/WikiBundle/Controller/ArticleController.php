@@ -32,10 +32,25 @@ class ArticleController extends Controller{
         //$articles = $em->getRepository(Article::class)->findAll();
         $articles = $em->getRepository(Article::class)->getAllArticles();
 
-
-
         $data = $serializer->serialize($articles, 'json');
 
         return new Response($data);
     }
+
+    /**
+   * @Route("/articles/{id}", requirements={"id":"\d+"})
+   * @Method("GET")
+   */
+  public function getArticleAction($id){
+      $serializer = SerializerBuilder::create()->build();
+      $em = $this->getDoctrine()->getManager();
+      $article = $em->getRepository(Article::class)->getOneArticle($id);
+      if(empty($article))
+      {
+          return new JsonResponse(['message' => 'Article not found'], Response::HTTP_NOT_FOUND);
+      }
+      $data = $serializer->serialize($article, 'json');
+
+      return new Response($data);
+  }
 }

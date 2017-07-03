@@ -34,6 +34,22 @@ class UserController extends Controller{
         $data = $serializer->serialize($users, 'json');
 
         return new Response($data);
-
     }
+
+    /**
+   * @Route("/users/{id}", requirements={"id":"\d+"})
+   * @Method("GET")
+   */
+  public function getUserAction($id){
+      $serializer = SerializerBuilder::create()->build();
+      $em = $this->getDoctrine()->getManager();
+      $user = $em->getRepository(User::class)->getOneUser($id);
+      if(empty($user))
+      {
+          return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+      }
+      $data = $serializer->serialize($user, 'json');
+
+      return new Response($data);
+  }
 }
