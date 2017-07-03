@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Entity\DoctrineTrait;
+namespace WikiBundle\Entity\DoctrineTrait;
 
 use Doctrine\ORM\Mapping as ORM;
 
