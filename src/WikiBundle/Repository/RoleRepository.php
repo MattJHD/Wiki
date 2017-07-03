@@ -9,5 +9,12 @@ use Doctrine\ORM\EntityRepository;
  * @author williambloch
  */
 class RoleRepository extends EntityRepository{
-
+  public function getAllRoles(){
+    $qb = $this->_em->createQueryBuilder()
+            ->select('role')
+            ->from("WikiBundle:Role", "role");
+    $query = $qb->getQuery();
+    $results = $query->getResult();
+    return $results;
+  }
 }

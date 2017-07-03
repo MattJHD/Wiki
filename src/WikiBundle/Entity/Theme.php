@@ -15,22 +15,22 @@ use JMS\Serializer\Annotation\Type;
  * @ORM\Table()
  */
 class Theme {
-    
+
     use IdTrait;
-    
+
     /**
      * @ORM\Column(type="string")
-     * @Type("string") 
+     * @Type("string")
      */
     private $nom;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="theme", cascade={"persist", "merge"})
-     * @Type("AppBundle\Entity\Theme")
+     * @Type("WikiBundle\Entity\Theme")
      */
     private $user;
-    
-    
+
+
     //GETTERS
     function getNom() {
         return $this->nom;

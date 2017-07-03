@@ -29,7 +29,7 @@ class UserController extends Controller{
         $serializer = SerializerBuilder::create()->build();
 
         $em = $this->getDoctrine()->getManager();
-        $users = $em->getRepository(User::class)->findAll();
+        $users = $em->getRepository(User::class)->getAllUsers();
 
         $data = $serializer->serialize($users, 'json');
 

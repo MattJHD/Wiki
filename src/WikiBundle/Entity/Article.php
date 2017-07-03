@@ -14,44 +14,44 @@ use JMS\Serializer\Annotation\Type;
  * @ORM\Table()
  */
 class Article {
-    
+
     use IdTrait;
-    
+
     /**
      * @ORM\Column(type="string")
-     * @Type("string") 
+     * @Type("string")
      */
     private $name;
-    
+
     /**
      * @ORM\Column(type="string")
-     * @Type("string") 
+     * @Type("string")
      */
     private $description;
-    
+
     /**
      * @ORM\Column(type="datetime", nullable=true)
      * @Type("DateTime<'Y-m-d'>")
      */
     private $date_creation;
-    
+
     /**
      * @ORM\ManyToMany(targetEntity="Theme", cascade={"persist", "merge"})
-     * @Type("ArrayCollection<AppBundle\Entity\Theme>")
+     * @Type("ArrayCollection<WikiBundle\Entity\Theme>")
      */
     private $themes;
-    
+
     /**
      * @var null|UploadedFile
      */
     private $media;
-    
+
     /**
      * @var null|string
      * @ORM\Column(nullable=true)
      */
     private $path;
-    
+
     //GETTERS
     function getName() {
         return $this->name;

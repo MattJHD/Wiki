@@ -8,32 +8,31 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
-use WikiBundle\Entity\Role;
+use WikiBundle\Entity\Theme;
 use JMS\Serializer\SerializerBuilder;
 
 
 /**
- * Description of RoleController
+ * Description of ThemeController
  *
  * @author williambloch
  *
  */
-class RoleController extends Controller{
+class ThemeController extends Controller{
 
     /**
      * @Method("GET")
-     * @Route("/roles")
+     * @Route("/themes")
      */
-    public function getRolesAction(){
+    public function getThemesAction(){
 
         $serializer = SerializerBuilder::create()->build();
 
         $em = $this->getDoctrine()->getManager();
-        $roles = $em->getRepository(Role::class)->getAllRoles();
+        $themes = $em->getRepository(Theme::class)->getAllThemes();
 
-        $data = $serializer->serialize($roles, 'json');
+        $data = $serializer->serialize($themes, 'json');
 
         return new Response($data);
-
     }
 }
