@@ -4,6 +4,7 @@ namespace WikiBundle\Entity;
 
 use WikiBundle\Entity\DoctrineTrait\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Type;
 
 
 /**
@@ -19,14 +20,12 @@ class User
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotNull()
      * @Type("string")
      */
     private $firstname;
 
     /**
      * @ORM\Column(type="string")
-     * @Assert\NotNull()
      * @Type("string")
      */
     private $lastname;
@@ -34,8 +33,6 @@ class User
     /**
      * @var string
      * @ORM\Column(unique=true)
-     * @Assert\NotNull()
-     * @Assert\Length(max=255)
      *
      * @Type("string")
      */
@@ -44,9 +41,6 @@ class User
     /**
      * @var Salt
      * @ORM\Column()
-     * @Assert\Length(max=255)
-     * @Assert\Type("string")
-     * @Assert\NotNull()
      *
      * @Type("string")
      */
@@ -54,15 +48,12 @@ class User
 
     /**
      * @var string
-     * @Assert\Length(max=4096)
      */
     private $rawPassword;
 
     /**
      * @var Password
      * @ORM\Column()
-     * @Assert\Length(max=255)
-     * @Assert\Type("string")
      *
      * @Type("string")
      */
@@ -76,7 +67,7 @@ class User
 
     /**
      * @ORM\ManyToOne(targetEntity="Role", inversedBy="users", cascade={"persist", "remove", "merge"})
-     * @Type("AppBundle\Entity\Role")
+     * @Type("AppBundle\Entity\User")
      */
     private $role;
 

@@ -4,7 +4,6 @@ namespace WikiBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Type;
 use WikiBundle\Entity\DoctrineTrait\IdTrait;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Description of ROLE
@@ -26,9 +25,9 @@ class Role {
 
     /**
      *
-     * @ORM\OneToMany(targetEntity="User", inversedBy="role", cascade={"persist", "remove", "merge"})
+     * @ORM\OneToMany(targetEntity="User", mappedBy="role", cascade={"persist", "remove", "merge"})
      *
-     * @Type("WikiBundle\Entity\User")
+     * @Type("WikiBundle\Entity\Role")
      */
     private $users;
 
