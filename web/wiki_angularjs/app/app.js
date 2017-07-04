@@ -1,4 +1,4 @@
-var app = angular.module('app', ['ui.router', 'ui.bootstrap', 'angularjs-datetime-picker', 'ngSanitize', 'dashboard']);
+var app = angular.module('app', ['ui.router', 'ui.bootstrap', 'angularjs-datetime-picker', 'ngSanitize', 'login', 'dashboard']);
 
 app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', function ( $stateProvider, $locationProvider, $urlRouterProvider) {
 
@@ -13,7 +13,7 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', functio
 			}
 		});
 
-    $urlRouterProvider.otherwise('app');
+    $urlRouterProvider.otherwise('login');
 
 }
 ])
