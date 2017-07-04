@@ -42,4 +42,22 @@ class ThemeRepository extends EntityRepository{
 
     return $result;
   }
+
+  // Query - Update Theme in Db
+  public function updateTheme($id, $theme){
+    $name = $theme->getName();
+    $user_id = $theme->getUser()->getId();
+
+    $qb = $this->_em->createQueryBuilder()
+              ->update("WikiBundle:Theme", "theme")
+              ->set("theme.user", ":user_id")
+              ->set("theme.name", ":name")
+              ->andWhere("theme.id = :id")
+              ->setParameter("id", $id)
+              ->setParameter("user_id", $user_id)
+              ->setParameter("name", $name);
+      $query = $qb->getQuery();
+      $results = $query->getResult();
+      return $results;
+  }
 }

@@ -43,4 +43,19 @@ class RoleRepository extends EntityRepository{
 
     return $result;
   }
+
+  // Query - Update Role in Db
+  public function updateRole($id, $role){
+    $name = $role->getName();
+
+    $qb = $this->_em->createQueryBuilder()
+              ->update("WikiBundle:Role", "role")
+              ->set("role.name", ":name")
+              ->andWhere("role.id = :id")
+              ->setParameter("id", $id)
+              ->setParameter("name", $name);
+      $query = $qb->getQuery();
+      $results = $query->getResult();
+      return $results;
+  }
 }
