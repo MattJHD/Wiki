@@ -1,4 +1,4 @@
-var dashboard = angular.module('dashboard', ['ui.router.router', 'ui.router.stateHelper', 'ngAnimate','ngMaterial', 'angular-loading-bar','angularMoment']);
+var dashboard = angular.module('dashboard', ['ui.router.stateHelper', 'ngAnimate','ngMaterial', 'angular-loading-bar','angularMoment']);
 
 dashboard.config(["stateHelperProvider", "cfpLoadingBarProvider", function(stateHelperProvider, cfpLoadingBarProvider){
 
