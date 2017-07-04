@@ -8,50 +8,35 @@ dashboard.config(["stateHelperProvider", "cfpLoadingBarProvider", function(state
 		name: 'app.articles', 
 		url: '/articles',
 		templateUrl: 'app/modules/dashboard/views/articles/articles.html',
-		controller: 'ArticlesController',
-		data: {
-			pageTitle: 'Articles'
-		}
+		controller: 'ArticlesController'
 	});
 
 	stateHelperProvider.state({
 		name: 'app.medias', 
 		url: '/medias',
 		templateUrl: 'app/modules/dashboard/views/medias/medias.html',
-		controller: 'MediasController',
-		data: {
-			pageTitle: 'Medias'
-		}
+		controller: 'MediasController'
 	});
 
 	stateHelperProvider.state({
 		name: 'app.thematiques', 
 		url: '/thematiques',
 		templateUrl: 'app/modules/dashboard/views/thematiques/thematiques.html',
-		controller: 'ThematiquesController',
-		data: {
-			pageTitle: 'Thematiques'
-		}
+		controller: 'ThematiquesController'
 	});
 
 	stateHelperProvider.state({
 		name: 'app.utilisateurs', 
 		url: '/utilisateurs',
 		templateUrl: 'app/modules/dashboard/views/utilisateurs/utilisateurs.html',
-		controller: 'UtilisateursController',
-		data: {
-			pageTitle: 'Utilisateurs'
-		}
+		controller: 'UtilisateursController'
 	});
 
 	stateHelperProvider.state({
 		name: 'app.administration', 
 		url: '/administration',
 		templateUrl: 'app/modules/dashboard/views/administration/administration.html',
-		controller: 'AdministrationController',
-		data: {
-			pageTitle: 'Administration'
-		}
+		controller: 'AdministrationController'
 	});
 
 
