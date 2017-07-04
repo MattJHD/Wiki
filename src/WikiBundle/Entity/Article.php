@@ -49,8 +49,9 @@ class Article {
     /**
      * @var null|string
      * @ORM\Column(nullable=true)
+     * @Type("string")
      */
-    private $path;
+    private $pathname;
 
     //GETTERS
     function getName() {
@@ -73,8 +74,8 @@ class Article {
         return $this->media;
     }
 
-    function getPath() {
-        return $this->path;
+    function getPathname() {
+        return $this->pathname;
     }
 
     //SETTERS
@@ -98,8 +99,8 @@ class Article {
         $this->media = $media;
     }
 
-    function setPath($path) {
-        $this->path = $path;
+    function setPathname($pathname) {
+        $this->pathname = $pathname;
     }
 
 

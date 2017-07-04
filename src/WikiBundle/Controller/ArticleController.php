@@ -53,4 +53,27 @@ class ArticleController extends Controller{
 
       return new Response($data);
   }
+
+
+  /**
+ * @Route("/articles")
+ * @Method("POST")
+ */
+  public function postArticleAction(Request $request){
+    $serializer = SerializerBuilder::create()->build();
+    $jsonData = $request->getContent();
+    $article = $serializer->deserialize($jsonData, Article::class, 'json');
+    $errors = $this->get("validator")->validate($article);
+
+    if(count($errors) == 0){
+      $em = $this->getDoctrine()->getManager();
+      $em->getRepository(Article::class)->createArticle($em, $article);
+      // We associate Themes to the new Article
+      $em->getRepository(Article::class)->createArticleTheme($em, $article);
+
+      return new JsonResponse("OK");
+    }else{
+        return $errors;
+    }
+  }
 }

@@ -60,26 +60,18 @@ class RoleController extends Controller{
  * @Method("POST")
  */
   public function postRoleAction(Request $request){
+    $serializer = SerializerBuilder::create()->build();
+    $jsonData = $request->getContent();
+    $role = $serializer->deserialize($jsonData, Role::class, 'json');
+    $errors = $this->get("validator")->validate($role);
 
-      $serializer = SerializerBuilder::create()->build();
+    if(count($errors) == 0){
+      $em = $this->getDoctrine()->getManager();
+      $em->getRepository(Role::class)->createRole($em, $role);
 
-      $jsonData = $request->getContent();
-
-      $role = $serializer->deserialize($jsonData, Role::class, 'json');
-
-      $errors = $this->get("validator")->validate($role);
-
-      if(count($errors) == 0){
-        $em = $this->getDoctrine()->getManager();
-
-        //$em->persist($role);
-        //$em->flush();
-        $em->getRepository(Role::class)->createRole($em, $role);
-
-        return new JsonResponse("OK");
-      }else{
-          return $errors;
-      }
-
+      return new JsonResponse("OK");
+    }else{
+        return $errors;
+    }
   }
 }

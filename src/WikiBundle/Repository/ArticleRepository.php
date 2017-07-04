@@ -2,6 +2,7 @@
 namespace WikiBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * Description of ArticleRepository
@@ -30,5 +31,36 @@ class ArticleRepository extends EntityRepository{
       $query = $qb->getQuery();
       $results = $query->getResult();
       return $results;
+  }
+
+  // Query - Insert Article in Db
+  public function createArticle($em, $article){
+    // We need to convert date from DateTime Format to String
+    $creationDate = $article->getDate_creation()->format('Y-m-d h:m:s');
+
+    $RAW_QUERY = 'INSERT
+                  INTO ARTICLE (name, description, date_creation, pathname)
+                  VALUES ("'.$article->getName().'", "'.$article->getDescription().'", "'.$creationDate.'", "'.$article->getPathname().'");';
+    $statement = $em->getConnection()->prepare($RAW_QUERY);
+    $result = $statement->execute();
+    return $result;
+  }
+
+
+  // Query - Insert User in Db
+  public function createArticleTheme($em, $article){
+    // We get the last inserted id
+    // It will be the article id
+    $last_id = $em->getConnection()->lastInsertId();
+
+    $themes = $article->getThemes();
+    foreach ($themes as $theme) {
+      $RAW_QUERY = 'INSERT
+                    INTO ARTICLE_THEME (article_id, theme_id)
+                    VALUES ("'.$last_id.'", "'.$theme->getId().'");';
+      $statement = $em->getConnection()->prepare($RAW_QUERY);
+      $result = $statement->execute();
+    }
+    return $result;
   }
 }

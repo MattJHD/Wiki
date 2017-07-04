@@ -22,7 +22,7 @@ class Theme {
      * @ORM\Column(type="string")
      * @Type("string")
      */
-    private $nom;
+    private $name;
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="theme", cascade={"persist", "merge"})
@@ -32,8 +32,8 @@ class Theme {
 
 
     //GETTERS
-    function getNom() {
-        return $this->nom;
+    function getName() {
+        return $this->name;
     }
 
     function getUser() {
@@ -42,14 +42,11 @@ class Theme {
 
 
     //SETTERS
-    function setNom($nom) {
-        $this->nom = $nom;
+    function setName($name) {
+        $this->name = $name;
     }
 
     function setUser($user) {
         $this->user = $user;
     }
-
-
-
 }

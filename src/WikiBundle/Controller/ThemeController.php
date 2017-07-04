@@ -52,4 +52,25 @@ class ThemeController extends Controller{
 
       return new Response($data);
   }
+
+
+  /**
+ * @Route("/themes")
+ * @Method("POST")
+ */
+  public function postThemeAction(Request $request){
+    $serializer = SerializerBuilder::create()->build();
+    $jsonData = $request->getContent();
+    $theme = $serializer->deserialize($jsonData, Theme::class, 'json');
+    $errors = $this->get("validator")->validate($theme);
+
+    if(count($errors) == 0){
+      $em = $this->getDoctrine()->getManager();
+      $em->getRepository(Theme::class)->createTheme($em, $theme);
+
+      return new JsonResponse("OK");
+    }else{
+        return $errors;
+    }
+  }
 }

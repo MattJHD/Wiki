@@ -52,4 +52,24 @@ class UserController extends Controller{
 
       return new Response($data);
   }
+
+  /**
+ * @Route("/users")
+ * @Method("POST")
+ */
+  public function postUserAction(Request $request){
+    $serializer = SerializerBuilder::create()->build();
+    $jsonData = $request->getContent();
+    $user = $serializer->deserialize($jsonData, User::class, 'json');
+    $errors = $this->get("validator")->validate($user);
+
+    if(count($errors) == 0){
+      $em = $this->getDoctrine()->getManager();
+      $em->getRepository(User::class)->createUser($em, $user);
+
+      return new JsonResponse("OK");
+    }else{
+        return $errors;
+    }
+  }
 }

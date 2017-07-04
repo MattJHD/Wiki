@@ -31,4 +31,15 @@ class UserRepository extends EntityRepository{
       $results = $query->getResult();
       return $results;
   }
+
+  // Query - Insert User in Db
+  public function createUser($em, $user){
+    $RAW_QUERY = 'INSERT
+                  INTO USER (role_id, firstname, lastname, username, salt, password, email)
+                  VALUES ("'.$user->getRole()->getId().'", "'.$user->getFirstname().'", "'.$user->getLastname().'", "'.$user->getUsername().'", "'.$user->getSalt().'", "'.$user->getPassword().'", "'.$user->getEmail().'");';
+    $statement = $em->getConnection()->prepare($RAW_QUERY);
+    $result = $statement->execute();
+
+    return $result;
+  }
 }

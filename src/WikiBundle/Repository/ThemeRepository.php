@@ -31,4 +31,15 @@ class ThemeRepository extends EntityRepository{
       $results = $query->getResult();
       return $results;
   }
+
+  // Query - Insert Theme in Db
+  public function createTheme($em, $theme){
+    $RAW_QUERY = 'INSERT
+                  INTO THEME (user_id, name)
+                  VALUES ("'.$theme->getUser()->getId().'", "'.$theme->getName().'");';
+    $statement = $em->getConnection()->prepare($RAW_QUERY);
+    $result = $statement->execute();
+
+    return $result;
+  }
 }
