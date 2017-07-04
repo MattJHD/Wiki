@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org.1999.xhtml" xml:lang="fr" lang="fr">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE-edge">
+		<link href="#" rel="icon" type="image/x-icon" />
+
+		<title>Wiki </title>
+
+		<link href="css/bootstrap.min.css" rel="stylesheet" />
+		<link href="css/customs.css" rel="stylesheet" />
+		<link href="css/site.css" rel="stylesheet" />
+	    <link href="css/style.css" rel="stylesheet" />
+	    <link href="css/nga.all.min.css" rel="stylesheet" />
+	    <link href="css/themes.css" rel="stylesheet" />
+	    <link href="css/loading-bar.min.css" rel="stylesheet" />
+	    <link href="css/dashboard.css" rel="stylesheet" />
+	    <link href="css/font-awesome.min.css" rel="stylesheet" />
+	  	<link href="css/angular-material.min.css" rel="stylesheet" />
+	  	<link href="css/angularjs-datetime-picker.css" rel="stylesheet" />
+		<!--[if lt IE 9]>
+			<script src="html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body ng-app="app" class="hold-transition sidebar-mini {{theme}}">
+
+	<!-- Scripts -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+
+	<script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+	
+	<script src="https://use.fontawesome.com/49f95b5c70.js"></script>
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js"></script>
+    <script src="js/loading-bar.min.js"></script>
+    <script src="js/angular-ui-router-min.js"></script>
+    <script src="js/statehelper.min.js"></script>
+    <script src="js/angular-resource.js"></script>
+
+
+     <!-- Angular Material Library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js">
+    </script>
+    
+    <script src="js/angular-sanitize.js"></script>
+    <script src="js/ui-bootstrap-tpls-0.13.0.min.js"></script>
+    <script src="js/angularjs-datetime-picker.min.js"></script>   
+
+    <!-- moment.js -->
+    <script src="js/moment.min.js"></script>
+    <script src="js/angular-locale_fr-fr.js"></script>
+    <script src="js/angular-moment.min.js"></script>
+
+	<!--Config-->
+    <script src="app/config.js"></script>
+
+     <!--main app-->
+    <script src="app/app.js"></script>
+    <script src="app/common/appCtrl.js"></script>
+
+    <!--Login Module-->
+<!-- <script src="app/modules/login/loginMgmt.js"></script>
+    <script src="app/modules/login/loginCtrl.js"></script> -->
+
+    <!--Dashboard Module-->
+	<script src="app/modules/dashboard/dashboardApplication.js"></script>
+        <!-- Controllers -->
+        <script src="app/modules/dashboard/controllers/articles/ArticlesController.js"></script>
+        <script src="app/modules/dashboard/controllers/medias/MediasController.js"></script>
+        <script src="app/modules/dashboard/controllers/thematiques/ThematiquesController.js"></script>
+        <script src="app/modules/dashboard/controllers/utilisateurs/UtilisateursController.js"></script>
+        <script src="app/modules/dashboard/controllers/administration/AdministrationController.js"></script>
+        
+
+	<div flash-message="5000"></div>
+    <ui-view></ui-view>
+
+	</body>
+</html>

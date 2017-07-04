@@ -1,0 +1,40 @@
+@charset "utf-8";
+
+body {
+    top: 0 !important;
+}
+
+.spacer{
+	margin-top: 20px;
+}
+
+.table-hover > tbody > tr:hover > td,
+.table-hover > tbody > tr:hover > th{
+	background-color: #b3b3b3;
+	color: #ffffff;
+}
+
+/* .clickable{
+	cursor: pointer;
+} */
+.angularjs-datetime-picker{
+	z-index: 9999;
+}
+
+.sortorder{
+	border: none;
+}
+
+.sortorder:after {
+	content: '\25b2';   // BLACK UP-POINTING TRIANGLE
+}
+.sortorder.reverse:after {
+	content: '\25bc';   // BLACK DOWN-POINTING TRIANGLE
+}
+
+
+/* modal window */
+/* bleu yacast #1ab7ea */
+md-toolbar.md-default-theme:not(.md-menu-toolbar), md-toolbar:not(.md-menu-toolbar){
+	background-color: #3c8dbc !important;
+}

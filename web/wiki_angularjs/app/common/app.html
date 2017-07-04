@@ -1,0 +1,78 @@
+<div class="wrapper">
+	<header class="main-header">
+		<a class="logo" ng-repeat="title in appTitle" ui-sref="app">
+			<span class="logo-mini"><b>{{title.shortname}}</b></span>
+			<span class="logo-lg"><b>{{title.name}}</b></span>
+		</a>
+
+		<nav class="navbar navbar-static-top">
+		<a class="sidebar-toggle" data-toggle="offcanvas" ng-click="sideBar(1);">
+		<span class="sr-only"></span>
+		</a>
+
+		<div class="navbar-custom-menu">
+			<ul class="nav navbar-nav">
+				<li class="dropdown user user-menu">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-user"></i>
+                        <span class="hidden-xs">{{userName}}</span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <!-- User image -->
+                        <li class="user-header">
+                            <img src="#" class="img-circle" alt="User Image">
+                                <h3>{{userName}}</h3>
+                        </li>
+                        <!-- Menu Footer-->
+                        <li class="user-footer">
+                            <div class="pull-left">
+                                <a ui-sref="app.about" class="btn btn-success btn-flat">Profil</a>
+                            </div>
+                            <div class="pull-right">
+                                <a ui-sref="login" class="btn btn-danger btn-flat">Deconnexion</a>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+			</ul>
+		</div>
+	</header>
+
+	<aside class="main-sidebar">
+		<section class="sidebar">
+			<ul class="sidebar-menu">
+                <li class="treeview" ui-sref-active="active" ng-click="sideBar();" ng-repeat="menu in menuItems">
+                    <a ui-sref="app.{{menu.state}}">
+                        <i class="fa fa-{{menu.icon}}"></i> <span>{{menu.title}}</span>
+                    </a>
+                </li>
+            </ul>
+		</section>
+	</aside>
+
+	<div class="content-wrapper">
+        <ui-view>
+        
+            <div class="container" style="height: 100vh">
+                <div class="row">
+                    <div class="text-center">
+                        <div class="col-xs-12">
+                            <img ng-src="{{logo}}" alt="Wiki-logo" width="200px" style="margin: 10px">
+                        </div>
+                        <h3>Bonjour {{userName}}</h3>
+                        <small>Welcome dans Wiki !!</small>
+                    </div>
+                </div>
+
+            </div>
+
+        </ui-view>
+    </div>
+
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> {{version}}
+            </div>
+            <strong>Copyright &copy; Wiki.</strong>
+        </footer>
+</div>
