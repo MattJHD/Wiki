@@ -1,7 +1,14 @@
-dashboard.controller("MediasController", ['$scope',
-	function($scope){
+dashboard.controller("MediasController", ['$scope', '$http', 'appSettings',
+	function($scope, $http, appSettings){
 
-		$scope.test = "Medias";
+		var backend = appSettings.backend;
+		console.log(backend);
+
+		//getMedias
+		$http.get(backend + "medias").then(function(response){
+			$scope.medias = response.data;
+			console.log($scope.medias);
+		});
 
 
 

@@ -1,8 +1,14 @@
-dashboard.controller("ThematiquesController", ['$scope',
-	function($scope){
+dashboard.controller("ThematiquesController", ['$scope', '$http', 'appSettings',
+	function($scope, $http, appSettings){
 
-		$scope.test = "Thematiques";
+		var backend = appSettings.backend;
+		console.log(backend);
 
+		//getThemes
+		$http.get(backend + "themes").then(function(response){
+			$scope.themes = response.data;
+			console.log($scope.themes);
+		});
 
 
 }]);

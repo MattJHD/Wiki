@@ -1,7 +1,14 @@
-dashboard.controller("UtilisateursController", ['$scope',
-	function($scope){
+dashboard.controller("UtilisateursController", ['$scope', '$http', 'appSettings',
+	function($scope, $http, appSettings){
 
-		$scope.test = "Utilisateurs";
+		var backend = appSettings.backend;
+		console.log(backend);
+
+		//getUsers
+		$http.get(backend + "users").then(function(response){
+			$scope.users = response.data;
+			console.log($scope.users);
+		});
 
 
 
