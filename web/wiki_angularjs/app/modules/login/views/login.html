@@ -1,0 +1,42 @@
+<div class="container margin-top-80">
+    <div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2">
+    
+        <div class="panel panel-default">
+            <div class="panel-heading text-center">
+                <img src="assets/img/Wiki.png" alt="Wiki" width="150px">
+            </div>
+            <div class="panel-body">
+                <form name="loginForm" class="form-horizontal" ng-submit="loginWiki(login, mdp);">
+                <span class="label label-info">Connexion</span>
+                    <div class="col-xs-12 input-group spacer">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+
+                        <input id="login-username" type="text" class="form-control" name="username" value="admin" placeholder="Nom" ng-model="login" required>
+                    </div>
+                    <div class="col-xs-12 input-group margin-top-20">
+                        <span class="input-group-addon"><i class="fa fa-key"></i></span>
+
+                        <input id="login-password" type="password" class="form-control" name="password" placeholder="Mot de passe" ng-model="mdp" required value="admin">
+                    </div>
+
+                    <div class="col-xs-12 margin-top-20">
+                        <span class="pull-left">
+                            <input id="login-remember" type="checkbox" name="remember" value="1"> Se souvenir
+                        </span>
+                        <span class="pull-right">
+                            <a href="#">Mdp oublié?</a>
+                        </span>
+                    </div>
+
+                    <div class="col-xs-12 margin-top-20">
+                        <button type="submit" class="btn btn-block btn-success">
+                            Connexion <span class="fa fa-play-circle"></span>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
