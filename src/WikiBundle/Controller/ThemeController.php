@@ -73,4 +73,28 @@ class ThemeController extends Controller{
         return $errors;
     }
   }
+
+  /**
+   * @Route("/themes/{id}", requirements={"id":"\d+"})
+   * @Method("PUT")
+   */
+  public function putThemesAction($id, Request $request){
+      $serializer = SerializerBuilder::create()->build();
+
+      $em = $this->getDoctrine()->getManager();
+
+      $jsonData = $request->getContent();
+
+      $theme = $serializer->deserialize($jsonData, Theme::class, 'json');
+      $errors = $this->get("validator")->validate($theme);
+
+      if (count($errors) == 0) {
+          $em = $this->getDoctrine()->getManager();
+          $em->getRepository(Theme::class)->updateTheme($id, $theme);
+
+          return new JsonResponse("OK UPDATE");
+      } else {
+          return new JsonResponse("ERROR-NOT-VALID");
+      }
+  }
 }

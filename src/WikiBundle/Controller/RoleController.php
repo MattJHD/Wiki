@@ -74,4 +74,36 @@ class RoleController extends Controller{
         return $errors;
     }
   }
+
+
+
+  /**
+   * @Route("/roles/{id}", requirements={"id":"\d+"})
+   * @Method("PUT")
+   */
+  public function putRoleAction($id, Request $request){
+      $serializer = SerializerBuilder::create()->build();
+
+      $em = $this->getDoctrine()->getManager();
+
+      $jsonData = $request->getContent();
+
+      $role = $serializer->deserialize($jsonData, Role::class, 'json');
+      $errors = $this->get("validator")->validate($role);
+
+      if (count($errors) == 0) {
+          $em = $this->getDoctrine()->getManager();
+
+          //$em->merge($role);
+          //$em->flush();
+
+          //$em->getRepository(Role::class)->updateRole($em, $role);
+          $em->getRepository(Role::class)->updateRole($id, $role);
+
+          return new JsonResponse("OK UPDATE");
+      } else {
+          return new JsonResponse("ERROR-NOT-VALID");
+      }
+
+  }
 }

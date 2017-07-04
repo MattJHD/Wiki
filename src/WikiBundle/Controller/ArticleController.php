@@ -76,4 +76,31 @@ class ArticleController extends Controller{
         return $errors;
     }
   }
+
+  /**
+   * @Route("/articles/{id}", requirements={"id":"\d+"})
+   * @Method("PUT")
+   */
+  public function putArticlesAction($id, Request $request){
+      $serializer = SerializerBuilder::create()->build();
+
+      $em = $this->getDoctrine()->getManager();
+
+      $jsonData = $request->getContent();
+
+      $article = $serializer->deserialize($jsonData, Article::class, 'json');
+      $errors = $this->get("validator")->validate($article);
+
+      if (count($errors) == 0) {
+          $em = $this->getDoctrine()->getManager();
+          $em->getRepository(Article::class)->updateArticle($id, $article);
+          // We update associated Themes to the updated Article
+          $em->getRepository(Article::class)->updateArticleTheme($em, $article);
+
+
+          return new JsonResponse("OK UPDATE");
+      } else {
+          return new JsonResponse("ERROR-NOT-VALID");
+      }
+  }
 }

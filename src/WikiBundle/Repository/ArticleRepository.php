@@ -47,7 +47,7 @@ class ArticleRepository extends EntityRepository{
   }
 
 
-  // Query - Insert User in Db
+  // Query - Insert themes associated to an article in Db
   public function createArticleTheme($em, $article){
     // We get the last inserted id
     // It will be the article id
@@ -58,6 +58,53 @@ class ArticleRepository extends EntityRepository{
       $RAW_QUERY = 'INSERT
                     INTO ARTICLE_THEME (article_id, theme_id)
                     VALUES ("'.$last_id.'", "'.$theme->getId().'");';
+      $statement = $em->getConnection()->prepare($RAW_QUERY);
+      $result = $statement->execute();
+    }
+    return $result;
+  }
+
+
+  // Query - Update Article in Db
+  public function updateArticle($id, $article){
+    $name = $article->getName();
+    $description = $article->getDescription();
+    $date_creation = $article->getDate_creation();
+    //$date_creation = $article->getDate_creation()->format('Y-m-d h:m:s');
+    $pathname = $article->getPathname();
+
+    $qb = $this->_em->createQueryBuilder()
+              ->update("WikiBundle:Article", "article")
+              ->set("article.name", ":name")
+              ->set("article.description", ":description")
+              ->set("article.date_creation", ":date_creation")
+              ->set("article.pathname", ":pathname")
+              ->andWhere("article.id = :id")
+              ->setParameter("id", $id)
+              ->setParameter("name", $name)
+              ->setParameter("description", $description)
+              ->setParameter("date_creation", $date_creation)
+              ->setParameter("pathname", $pathname);
+      $query = $qb->getQuery();
+      $results = $query->getResult();
+      return $results;
+  }
+
+  // Query - Update themes associated to an article in Db
+  public function updateArticleTheme($em, $article){
+    $themes = $article->getThemes();
+
+    // We delete the associated themes
+    $RAW_QUERY = 'DELETE FROM ARTICLE_THEME
+                  WHERE article_id = "'.$article->getId().'"';
+    $statement = $em->getConnection()->prepare($RAW_QUERY);
+    $result = $statement->execute();
+
+    // Foreach new theme we create a new associated theme
+    foreach ($themes as $theme) {
+      $RAW_QUERY = 'INSERT
+                    INTO ARTICLE_THEME (article_id, theme_id)
+                    VALUES ("'.$article->getId().'", "'.$theme->getId().'");';
       $statement = $em->getConnection()->prepare($RAW_QUERY);
       $result = $statement->execute();
     }

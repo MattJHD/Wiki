@@ -72,4 +72,28 @@ class UserController extends Controller{
         return $errors;
     }
   }
+
+  /**
+   * @Route("/users/{id}", requirements={"id":"\d+"})
+   * @Method("PUT")
+   */
+  public function putUsersAction($id, Request $request){
+      $serializer = SerializerBuilder::create()->build();
+
+      $em = $this->getDoctrine()->getManager();
+
+      $jsonData = $request->getContent();
+
+      $user = $serializer->deserialize($jsonData, User::class, 'json');
+      $errors = $this->get("validator")->validate($user);
+
+      if (count($errors) == 0) {
+          $em = $this->getDoctrine()->getManager();
+          $em->getRepository(User::class)->updateUser($id, $user);
+
+          return new JsonResponse("OK UPDATE");
+      } else {
+          return new JsonResponse("ERROR-NOT-VALID");
+      }
+  }
 }
