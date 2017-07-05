@@ -13,8 +13,8 @@
                 {% endif %}
                 <form action="{{ path('login') }}" method="post">
                     <div class="body bg-gray">
-{#                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-#}                    <div class="form-group">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <div class="form-group">
                         <label class="sr-only" for="username">Username</label>
                         <input type="text" class="form-control" id="username" name="_username" placeholder="Email">
                     </div>
