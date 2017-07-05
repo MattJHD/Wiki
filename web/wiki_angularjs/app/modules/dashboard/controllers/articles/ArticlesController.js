@@ -6,10 +6,9 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings',
 
 		//getArticles
 		$http.get(backend + "articles").then(function(response){
-			$scope.articles = response.data;
-			console.log($scope.articles);
+			 $scope.articles = response.data;
+			 console.log($scope.articles);
+
 		});
-
-
 
 }]);

@@ -10,6 +10,4 @@ login.config(["$stateProvider", function($stateProvider){
             pageTitle: 'Login'
         }
     });
-
-
 }]);

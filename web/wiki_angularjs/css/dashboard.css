@@ -26,6 +26,24 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+
+.navbar-btn{
+  margin-right: 20px!important;
+}
+
+.no-padding{
+  padding-left: 0!important;
+  padding-right: 0!important;
+}
+
+.jumbotron{
+  padding-top: 10px!important;
+  padding-bottom: 10px!important;
+}
+
+html{
+  background-color: #fff;
+}
 /* Layout */
 .wrapper {
   min-height: 100%;

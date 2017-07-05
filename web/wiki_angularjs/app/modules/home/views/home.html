@@ -1,0 +1,67 @@
+<div class="wrapper">
+	<header class="main-header">
+		<a class="logo" ng-repeat="title in appTitle" ui-sref="app">
+			<span class="logo-mini"><b>{{title.shortname}}</b></span>
+			<span class="logo-lg"><b>{{title.name}}</b></span>
+		</a>
+
+		<nav class="navbar navbar-static-top">
+
+
+		<div class="navbar-custom-menu">
+			<ul class="nav navbar-nav">
+        <a class="" ui-sref="login">
+    		   <button type="button" class="btn btn-default navbar-btn">Login</button>
+    		</a>
+			</ul>
+		</div>
+	</header>
+
+	<div class="content-wrapper" style="margin-left:0!important;">
+        <ui-view>
+          <div class="jumbotron">
+            <div class="container">
+              <h1>Wikitema</h1>
+              <p>La plateforme de partage d'informations!</p>
+            </div>
+          </div>
+            <div class="container" style="height: auto">
+                <div class="row">
+                  <div class="panel panel-default col-md-6 no-padding">
+                    <div class="panel-heading">Article du jour</div>
+                    <div class="panel-body">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                  </div>
+
+                  <div class="panel panel-default col-md-5 col-md-offset-1 no-padding">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Présentation</h3>
+                    </div>
+                    <div class="panel-body">
+                      Wikitema est un projet d’encyclopédie collective en ligne, universelle, multilingue et fonctionnant sur le principe du wiki. Wikipédia a pour objectif d’offrir un contenu librement réutilisable, objectif et vérifiable, que chacun peut modifier et améliorer.
+Tous les rédacteurs des articles de Wikipédia sont bénévoles. Ils coordonnent leurs efforts au sein d'une communauté collaborative, sans dirigeant.
+Aujourd'hui, Wikipédia en français compte :
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="panel panel-default col-sm-12 no-padding">
+                    <div class="panel-heading">Comment contribuer</div>
+                    <div class="panel-body">
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </ui-view>
+    </div>
+
+    <footer class="main-footer">
+        <div class="pull-right hidden-xs">
+            <b>Version</b> {{version}}
+        </div>
+        <strong>Copyright &copy; Wikitema.</strong>
+    </footer>
+</div>
