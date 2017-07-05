@@ -5,6 +5,15 @@ parameters:
 
 services:
    encoder.password:
-       class: WikiBundle\Encoder\EncoderPassword
-       arguments: 
-           - '@security.password_encoder'
+        class: WikiBundle\Encoder\EncoderPassword
+        arguments: 
+            - '@security.password_encoder'
+           
+   mailer.contact_mailer:
+        class: WikiBundle\Mailer\ContactMailer
+        arguments: 
+            - '%kernel.root_dir%'
+            - '@templating'
+            - '@mailer'
+            - '%mailer_from_email%'
+            - '%mailer_to_email%'
