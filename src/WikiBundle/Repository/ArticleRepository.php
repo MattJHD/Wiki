@@ -110,4 +110,16 @@ class ArticleRepository extends EntityRepository{
     }
     return $result;
   }
+
+  // Query - Delete Article in Db
+  public function deleteArticle($id, $article){
+    $qb = $this->_em->createQueryBuilder()
+              ->delete("WikiBundle:Article", "article")
+              ->where('article.id = :id')
+              ->setParameter('id', $id);
+    $query = $qb->getQuery();
+    $results = $query->getResult();
+
+    return $results;
+  }
 }

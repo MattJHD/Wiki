@@ -19,41 +19,34 @@ use JMS\Serializer\SerializerBuilder;
  *
  */
 class ArticleController extends Controller{
+  /**
+  * @Method("GET")
+  * @Route("/articles")
+  */
+  public function getArticlesAction(){
+    $serializer = SerializerBuilder::create()->build();
+    $em = $this->getDoctrine()->getManager();
+    $articles = $em->getRepository(Article::class)->getAllArticles();
+    $data = $serializer->serialize($articles, 'json');
 
-    /**
-     * @Method("GET")
-     * @Route("/articles")
-     */
-    public function getArticlesAction(){
-
-        $serializer = SerializerBuilder::create()->build();
-
-        $em = $this->getDoctrine()->getManager();
-        //$articles = $em->getRepository(Article::class)->findAll();
-        $articles = $em->getRepository(Article::class)->getAllArticles();
-
-        $data = $serializer->serialize($articles, 'json');
-
-        return new Response($data);
-    }
-
-    /**
-   * @Route("/articles/{id}", requirements={"id":"\d+"})
-   * @Method("GET")
-   */
-  public function getArticleAction($id){
-      $serializer = SerializerBuilder::create()->build();
-      $em = $this->getDoctrine()->getManager();
-      $article = $em->getRepository(Article::class)->getOneArticle($id);
-      if(empty($article))
-      {
-          return new JsonResponse(['message' => 'Article not found'], Response::HTTP_NOT_FOUND);
-      }
-      $data = $serializer->serialize($article, 'json');
-
-      return new Response($data);
+    return new Response($data);
   }
 
+  /**
+  * @Route("/articles/{id}", requirements={"id":"\d+"})
+  * @Method("GET")
+  */
+  public function getArticleAction($id){
+    $serializer = SerializerBuilder::create()->build();
+    $em = $this->getDoctrine()->getManager();
+    $article = $em->getRepository(Article::class)->getOneArticle($id);
+    if(empty($article)){
+      return new JsonResponse(['message' => 'Article not found'], Response::HTTP_NOT_FOUND);
+    }
+    $data = $serializer->serialize($article, 'json');
+
+    return new Response($data);
+  }
 
   /**
  * @Route("/articles")
@@ -73,34 +66,52 @@ class ArticleController extends Controller{
 
       return new JsonResponse("OK");
     }else{
-        return $errors;
+      return $errors;
     }
   }
 
   /**
-   * @Route("/articles/{id}", requirements={"id":"\d+"})
-   * @Method("PUT")
-   */
+  * @Route("/articles/{id}", requirements={"id":"\d+"})
+  * @Method("PUT")
+  */
   public function putArticlesAction($id, Request $request){
-      $serializer = SerializerBuilder::create()->build();
+    $serializer = SerializerBuilder::create()->build();
+    $em = $this->getDoctrine()->getManager();
+    $jsonData = $request->getContent();
+    $article = $serializer->deserialize($jsonData, Article::class, 'json');
+    $errors = $this->get("validator")->validate($article);
 
+    if (count($errors) == 0) {
       $em = $this->getDoctrine()->getManager();
+      $em->getRepository(Article::class)->updateArticle($id, $article);
+      // We update associated Themes to the updated Article
+      $em->getRepository(Article::class)->updateArticleTheme($em, $article);
 
-      $jsonData = $request->getContent();
+      return new JsonResponse("OK UPDATE");
+    } else {
+      return new JsonResponse("ERROR-NOT-VALID");
+    }
+  }
 
-      $article = $serializer->deserialize($jsonData, Article::class, 'json');
-      $errors = $this->get("validator")->validate($article);
+  /**
+  * @Route("/articles/delete/{id}", requirements={"id":"\d+"})
+  * @Method("GET|POST")
+  */
+  public function deleteArticleAction($id, Request $request){
+    $serializer = SerializerBuilder::create()->build();
+    $em = $this->getDoctrine()->getManager();
+    $jsonData = $request->getContent();
+    $article = $serializer->deserialize($jsonData, Article::class, 'json');
+    $errors = $this->get("validator")->validate($article);
 
-      if (count($errors) == 0) {
-          $em = $this->getDoctrine()->getManager();
-          $em->getRepository(Article::class)->updateArticle($id, $article);
-          // We update associated Themes to the updated Article
-          $em->getRepository(Article::class)->updateArticleTheme($em, $article);
+    if (count($errors) == 0) {
+      $em = $this->getDoctrine()->getManager();
+      // We call the function to delete an article
+      $em->getRepository(Article::class)->deleteArticle($id, $article);
 
-
-          return new JsonResponse("OK UPDATE");
-      } else {
-          return new JsonResponse("ERROR-NOT-VALID");
-      }
+      return new JsonResponse("OK - ARTICLE DELETED");
+    } else {
+      return new JsonResponse("ERROR-NOT-VALID");
+    }
   }
 }

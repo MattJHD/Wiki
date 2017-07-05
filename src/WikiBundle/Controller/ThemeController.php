@@ -20,41 +20,36 @@ use JMS\Serializer\SerializerBuilder;
  */
 class ThemeController extends Controller{
 
-    /**
-     * @Method("GET")
-     * @Route("/themes")
-     */
-    public function getThemesAction(){
+  /**
+  * @Method("GET")
+  * @Route("/themes")
+  */
+  public function getThemesAction(){
+    $serializer = SerializerBuilder::create()->build();
+    $em = $this->getDoctrine()->getManager();
+    $themes = $em->getRepository(Theme::class)->getAllThemes();
+    $data = $serializer->serialize($themes, 'json');
 
-        $serializer = SerializerBuilder::create()->build();
-
-        $em = $this->getDoctrine()->getManager();
-        $themes = $em->getRepository(Theme::class)->getAllThemes();
-
-        $data = $serializer->serialize($themes, 'json');
-
-        return new Response($data);
-    }
-
-    /**
-   * @Route("/themes/{id}", requirements={"id":"\d+"})
-   * @Method("GET")
-   */
-  public function getThemeAction($id){
-      $serializer = SerializerBuilder::create()->build();
-      $em = $this->getDoctrine()->getManager();
-      $theme = $em->getRepository(Theme::class)->getOneTheme($id);
-      if(empty($theme))
-      {
-          return new JsonResponse(['message' => 'Theme not found'], Response::HTTP_NOT_FOUND);
-      }
-      $data = $serializer->serialize($theme, 'json');
-
-      return new Response($data);
+    return new Response($data);
   }
 
-
   /**
+  * @Route("/themes/{id}", requirements={"id":"\d+"})
+  * @Method("GET")
+  */
+  public function getThemeAction($id){
+    $serializer = SerializerBuilder::create()->build();
+    $em = $this->getDoctrine()->getManager();
+    $theme = $em->getRepository(Theme::class)->getOneTheme($id);
+    if(empty($theme)){
+        return new JsonResponse(['message' => 'Theme not found'], Response::HTTP_NOT_FOUND);
+    }
+    $data = $serializer->serialize($theme, 'json');
+
+    return new Response($data);
+  }
+
+ /**
  * @Route("/themes")
  * @Method("POST")
  */
@@ -75,26 +70,45 @@ class ThemeController extends Controller{
   }
 
   /**
-   * @Route("/themes/{id}", requirements={"id":"\d+"})
-   * @Method("PUT")
-   */
+  * @Route("/themes/{id}", requirements={"id":"\d+"})
+  * @Method("PUT")
+  */
   public function putThemesAction($id, Request $request){
-      $serializer = SerializerBuilder::create()->build();
+    $serializer = SerializerBuilder::create()->build();
+    $em = $this->getDoctrine()->getManager();
+    $jsonData = $request->getContent();
+    $theme = $serializer->deserialize($jsonData, Theme::class, 'json');
+    $errors = $this->get("validator")->validate($theme);
 
+    if (count($errors) == 0) {
       $em = $this->getDoctrine()->getManager();
+      $em->getRepository(Theme::class)->updateTheme($id, $theme);
 
-      $jsonData = $request->getContent();
+      return new JsonResponse("OK UPDATE");
+    } else {
+      return new JsonResponse("ERROR-NOT-VALID");
+    }
+  }
 
-      $theme = $serializer->deserialize($jsonData, Theme::class, 'json');
-      $errors = $this->get("validator")->validate($theme);
+  /**
+  * @Route("/themes/delete/{id}", requirements={"id":"\d+"})
+  * @Method("GET|POST")
+  */
+  public function deleteThemeAction($id, Request $request){
+    $serializer = SerializerBuilder::create()->build();
+    $em = $this->getDoctrine()->getManager();
+    $jsonData = $request->getContent();
+    $theme = $serializer->deserialize($jsonData, Theme::class, 'json');
+    $errors = $this->get("validator")->validate($theme);
 
-      if (count($errors) == 0) {
-          $em = $this->getDoctrine()->getManager();
-          $em->getRepository(Theme::class)->updateTheme($id, $theme);
+    if (count($errors) == 0) {
+      $em = $this->getDoctrine()->getManager();
+      // We call the function to delete a theme
+      $em->getRepository(Theme::class)->deleteTheme($id, $theme);
 
-          return new JsonResponse("OK UPDATE");
-      } else {
-          return new JsonResponse("ERROR-NOT-VALID");
-      }
+      return new JsonResponse("OK - THEME DELETED");
+    } else {
+      return new JsonResponse("ERROR-NOT-VALID");
+    }
   }
 }
