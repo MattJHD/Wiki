@@ -58,4 +58,16 @@ class RoleRepository extends EntityRepository{
       $results = $query->getResult();
       return $results;
   }
+
+  // Query - Delete Role in Db
+  public function deleteRole($id, $role){
+    $qb = $this->_em->createQueryBuilder()
+              ->delete("WikiBundle:Role", "role")
+              ->where('role.id = :id')
+              ->setParameter('id', $id);
+    $query = $qb->getQuery();
+    $results = $query->getResult();
+
+    return $results;
+  }
 }
