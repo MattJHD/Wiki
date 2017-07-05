@@ -33,7 +33,7 @@ $scope.loginWiki = function(credentials){
                             if (user) {
                                 $localStorage.currentUser = {username: credentials._username, token: success.token, data: user} ;
                                 $http.defaults.headers.common.Authorization = 'Bearer ' + success.token;
-                                $state.go('app', {name : credentials.username});
+                                $state.go('app');
 
                                 console.log($localStorage);
                             }

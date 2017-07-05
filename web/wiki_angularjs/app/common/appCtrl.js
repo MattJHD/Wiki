@@ -1,5 +1,5 @@
-app.controller("appCtrl", ['$rootScope', '$scope', '$stateParams', '$location', 'appSettings',
-function ($rootScope, $scope, $stateParams, $location, appSettings, $timeout) {
+app.controller("appCtrl", ['$rootScope', '$scope', '$location', 'appSettings', '$localStorage', '$http', '$state',
+function ($rootScope, $scope, $location, appSettings, $localStorage, $http, $state) {
 
     $rootScope.theme = appSettings.theme;
 
@@ -8,10 +8,7 @@ function ($rootScope, $scope, $stateParams, $location, appSettings, $timeout) {
 
     $scope.today = new Date();
 
-    // $scope.userName = $stateParams.name;
-    // $scope.userRole = $stateParams.role;
-
-    console.log($scope.theme);
+    $scope.userName =  $localStorage.currentUser.data.username;
 
 
     $scope.appTitle = [
@@ -74,6 +71,12 @@ function ($rootScope, $scope, $stateParams, $location, appSettings, $timeout) {
         }
 
 
+    };
+
+    $scope.logout = function(){
+        delete $localStorage.currentUser;
+        $http.defaults.headers.common.Authorization = '';
+        $state.go('home');
     };
 
 
