@@ -13,7 +13,7 @@ function ($rootScope, $scope, $location, appSettings, $localStorage, $http, $sta
 
     $scope.appTitle = [
         {
-            name: "Wiki",
+            name: "Wikitema",
             shortname: "WK",
             state: "app"
         }
