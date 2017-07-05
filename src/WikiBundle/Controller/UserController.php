@@ -59,12 +59,21 @@ class UserController extends Controller{
     $serializer = SerializerBuilder::create()->build();
     $jsonData = $request->getContent();
     $user = $serializer->deserialize($jsonData, User::class, 'json');
+     
+    $user->setRawPassword("azerty");
+    
     $errors = $this->get("validator")->validate($user);
 
     if(count($errors) == 0){
       $em = $this->getDoctrine()->getManager();
+      
+      
+      $encodedPassword = $this->get('encoder.password')->encode($user);
+      
+      $password = $user->getPassword();
+  
       // We call the function to create a user
-      $em->getRepository(User::class)->createUser($em, $user);
+      $em->getRepository(User::class)->createUser($em, $user, $password);
 
       return new JsonResponse("OK");
     }else{

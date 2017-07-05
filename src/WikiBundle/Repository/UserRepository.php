@@ -2,13 +2,20 @@
 namespace WikiBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 
 /**
  * Description of UserRepository
  *
  * @author williambloch
  */
-class UserRepository extends EntityRepository{
+class UserRepository extends EntityRepository implements UserLoaderInterface{
+    
+    
+public function loadUserByUsername($username) 
+    {
+        return $this->findOneBy(['username' => $username]);
+    }
 
   // Query - Get all Users
   public function getAllUsers(){
@@ -33,10 +40,11 @@ class UserRepository extends EntityRepository{
   }
 
   // Query - Insert User in Db
-  public function createUser($em, $user){
+  public function createUser($em, $user, $password){
+  
     $RAW_QUERY = 'INSERT
                   INTO USER (role_id, firstname, lastname, username, salt, password, email)
-                  VALUES ("'.$user->getRole()->getId().'", "'.$user->getFirstname().'", "'.$user->getLastname().'", "'.$user->getUsername().'", "'.$user->getSalt().'", "'.$user->getPassword().'", "'.$user->getEmail().'");';
+                  VALUES ("'.$user->getRole()->getId().'", "'.$user->getFirstname().'", "'.$user->getLastname().'", "'.$user->getUsername().'", "'.$user->getSalt().'", "'.$password.'", "'.$user->getEmail().'");';
     $statement = $em->getConnection()->prepare($RAW_QUERY);
     $result = $statement->execute();
 

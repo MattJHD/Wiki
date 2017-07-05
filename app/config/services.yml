@@ -4,6 +4,7 @@ parameters:
     #parameter_name: value
 
 services:
-    #service_name:
-    #    class: AppBundle\Directory\ClassName
-    #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']
+   encoder.password:
+       class: WikiBundle\Encoder\EncoderPassword
+       arguments: 
+           - '@security.password_encoder'

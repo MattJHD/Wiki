@@ -31,7 +31,7 @@ security:
         main:
             anonymous: ~
             provider: chain_provider
-            http_basic: ~
+            #http_basic: ~
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
@@ -39,11 +39,15 @@ security:
 
             # https://symfony.com/doc/current/security/form_login_setup.html
             #form_login: ~
-            
+            form_login:
+                login_path: login
+                check_path: login
+                #csrf_token_generator: security.csrf.token_manager
+                
             logout: 
                 path: /logout
                 target: /
         
     access_control:
     # require ROLE_ADMIN for /admin*
-        - { path: ^/, roles: ROLE_ADMIN }
+        - { path: ^/wiki, roles: ROLE_ADMIN }

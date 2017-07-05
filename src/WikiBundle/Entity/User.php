@@ -5,6 +5,7 @@ namespace WikiBundle\Entity;
 use WikiBundle\Entity\DoctrineTrait\IdTrait;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Type;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 
 /**
@@ -14,7 +15,7 @@ use JMS\Serializer\Annotation\Type;
  * @ORM\Entity(repositoryClass="WikiBundle\Repository\UserRepository")
  * @ORM\Table()
  */
-class User
+class User implements UserInterface
 {
     use IdTrait;
 
