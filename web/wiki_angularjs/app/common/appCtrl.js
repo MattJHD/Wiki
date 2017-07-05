@@ -42,11 +42,6 @@ function ($rootScope, $scope, $stateParams, $location, appSettings, $timeout) {
             title: "Utilisateurs",
             icon: "users",
             state: "utilisateurs"
-        },
-        {
-            title: "Administration",
-            icon: "database",
-            state: "administration"
         }
     ];
 
@@ -54,12 +49,12 @@ function ($rootScope, $scope, $stateParams, $location, appSettings, $timeout) {
 
     // for(var i=0 ; i<vm.menuItems.length ; i++){
     //     if($scope.userRoles != vm.menuItems[i].permission){
-    //         $scope.item = true;    
+    //         $scope.item = true;
     //     }
     //     else{
-    //         $scope.item = null; 
+    //         $scope.item = null;
     //     }
-    //    console.log($scope.item); 
+    //    console.log($scope.item);
     // }
 
     $scope.sideBar = function (value ) {
@@ -77,7 +72,7 @@ function ($rootScope, $scope, $stateParams, $location, appSettings, $timeout) {
                 $("body").addClass('sidebar-collapse');
             }
         }
-        
+
 
     };
 

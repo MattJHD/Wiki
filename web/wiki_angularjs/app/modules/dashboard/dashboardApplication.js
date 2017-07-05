@@ -5,39 +5,39 @@ dashboard.config(["stateHelperProvider", "cfpLoadingBarProvider", function(state
 	cfpLoadingBarProvider.parentSelector = '.loader';
 
 	stateHelperProvider.state({
-		name: 'app.articles', 
+		name: 'app.articles',
 		url: '/articles',
 		templateUrl: 'app/modules/dashboard/views/articles/articles.html',
 		controller: 'ArticlesController'
 	});
 
 	stateHelperProvider.state({
-		name: 'app.medias', 
+		name: 'app.medias',
 		url: '/medias',
 		templateUrl: 'app/modules/dashboard/views/medias/medias.html',
 		controller: 'MediasController'
 	});
 
 	stateHelperProvider.state({
-		name: 'app.thematiques', 
+		name: 'app.thematiques',
 		url: '/thematiques',
 		templateUrl: 'app/modules/dashboard/views/thematiques/thematiques.html',
 		controller: 'ThematiquesController'
 	});
 
 	stateHelperProvider.state({
-		name: 'app.utilisateurs', 
+		name: 'app.utilisateurs',
 		url: '/utilisateurs',
 		templateUrl: 'app/modules/dashboard/views/utilisateurs/utilisateurs.html',
 		controller: 'UtilisateursController'
 	});
 
-	stateHelperProvider.state({
-		name: 'app.administration', 
-		url: '/administration',
-		templateUrl: 'app/modules/dashboard/views/administration/administration.html',
-		controller: 'AdministrationController'
-	});
+	// stateHelperProvider.state({
+	// 	name: 'app.administration',
+	// 	url: '/administration',
+	// 	templateUrl: 'app/modules/dashboard/views/administration/administration.html',
+	// 	controller: 'AdministrationController'
+	// });
 
 
 
