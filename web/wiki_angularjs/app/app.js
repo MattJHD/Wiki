@@ -29,5 +29,11 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', functio
 ])
 ;
 
+app.filter('capitalize', function() {
+    return function(input) {
+      return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+    }
+});
+
 // chargement des configs
 app.constant('appSettings', appConfig);
