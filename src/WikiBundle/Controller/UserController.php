@@ -77,7 +77,7 @@ class UserController extends Controller{
     $jsonData = $request->getContent();
     $user = $serializer->deserialize($jsonData, User::class, 'json');
      
-    $user->setRawPassword("azerty");
+    $user->setRawPassword(uniqid());
     
     $errors = $this->get("validator")->validate($user);
 
@@ -91,6 +91,8 @@ class UserController extends Controller{
   
       // We call the function to create a user
       $em->getRepository(User::class)->createUser($em, $user, $password);
+      
+      $this->get('mailer.contact_mailer')->sendPwd($user);
 
       return new JsonResponse("OK");
     }else{
