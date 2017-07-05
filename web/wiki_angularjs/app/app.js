@@ -1,16 +1,6 @@
-var app = angular.module('app', ['ui.router', 'ui.bootstrap', 'angularjs-datetime-picker', 'ngSanitize', 'home', 'dashboard']);
+var app = angular.module('app', ['ui.router', 'ui.bootstrap', 'angularjs-datetime-picker', 'ngSanitize', 'home', 'dashboard', 'login']);
 
 app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', function ( $stateProvider, $locationProvider, $urlRouterProvider) {
-
-    $stateProvider.state('login',
-    {
-      url: '/login',
-      templateUrl: 'app/modules/login/views/login.html',
-      controller: 'loginController',
-      data: {
-          pageTitle: 'Login'
-      }
-    });
 
     $stateProvider.state('app',
 		{
