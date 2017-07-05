@@ -41,6 +41,25 @@ body {
   padding-bottom: 10px!important;
 }
 
+.main-footer{
+  margin-left: 0!important;
+}
+
+.nav-pills li a{
+  color: blue!important;
+  font-size: 1.2rem!important;
+  font-style: italic;
+}
+
+.panel-title{
+  font-size: 20px!important;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.float-right{
+  float: right;
+  margin-top: -5px;
+}
 html{
   background-color: #fff;
 }
