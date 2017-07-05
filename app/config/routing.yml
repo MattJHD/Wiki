@@ -2,3 +2,6 @@ wiki:
     resource: "@WikiBundle/Controller/"
     type:     annotation
     prefix:   /
+
+logout:
+    path: /logout
