@@ -40,13 +40,23 @@ security:
             # https://symfony.com/doc/current/security/form_login_setup.html
             #form_login: ~
             form_login:
-                login_path: login
-                check_path: login
-                #csrf_token_generator: security.csrf.token_manager
+                check_path:               /login_check
+                username_parameter:       username
+                password_parameter:       password
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+                require_previous_session: false
                 
             logout: 
                 path: /logout
                 target: /
+                
+        test:
+            pattern:   ^/test
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
         
     access_control:
     # require ROLE_ADMIN for /admin*
