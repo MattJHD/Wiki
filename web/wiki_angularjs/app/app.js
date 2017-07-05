@@ -20,7 +20,7 @@ app.config(['$stateProvider', '$locationProvider', '$urlRouterProvider', functio
   }
 
   $rootScope.$on('$locationChangeStart', function (event, next, current) {
-        var publicPages = ['/login'];
+        var publicPages = ['/login', '/register'];
         var restrictedPage = publicPages.indexOf($location.path()) === -1;
         if (restrictedPage && !$localStorage.currentUser) {
             $location.path('/home');

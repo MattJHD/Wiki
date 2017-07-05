@@ -1,0 +1,57 @@
+<div class="loader"></div> 
+	<div class="container margin-top-80">
+		<div class="col-md-4 col-md-offset-4 col-sm-8 col-sm-offset-2">
+
+			<div class="panel panel-default">
+	            <div class="panel-heading text-center">
+	                <img src="assets/img/Wiki.png" alt="Wiki" width="150px">
+	            </div>
+
+	            <div class="panel-body">
+	            	<form name="registrationForm" ng-submit="register();">
+                	<span class="label label-info">Enregistrement</span>
+
+                	<div class="form-group spacer">
+                        <label for="email" class="col-md-12 control-label">Email</label>
+                        <div class="col-md-12">
+                            <input type="email" class="form-control" name="email" placeholder="Adresse email" required ng-model="setUser.Email">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="col-md-12 control-label margin-top-10">Nom</label>
+                        <div class="col-md-12">
+                            <input type="text" class="form-control" name="lastname" placeholder="Nom" required ng-model="setUser.Username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="col-md-12 control-label margin-top-10">Mot de passe</label>
+                        <div class="col-md-12">
+                            <input type="password" class="form-control" name="password" placeholder="Mot de passe" required ng-model="setUser.Password">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cpasswd" class="col-md-12 control-label margin-top-10">Confirmation</label>
+                        <div class="col-md-12">
+                            <input type="password" class="form-control" name="cpasswd" placeholder="Confirmation mot de passe" required ng-model="setUser.confirmPassword">
+                        </div>
+                    </div>
+                    <div class="col-xs-12 margin-top-20">
+                        <div class="col-xs-6 padding-left-none">
+                            <button type="submit" class="btn btn-block btn-success">
+                                Enregistrer <span class="fa fa-play-circle"></span>
+                            </button>
+                        </div>
+                        <div class="col-xs-6 padding-right-none">
+                            <button type="button" class="btn btn-block btn-warning" ui-sref="home">
+                                Retour <span class="fa fa-undo"></span>
+                            </button>
+                        </div>
+                    </div>
+
+	            </div>
+
+            </div>
+
+		</div>
+	</div>

@@ -5,9 +5,12 @@ login.config(["$stateProvider", function($stateProvider){
 	$stateProvider.state('login', {
         url: '/login',
         templateUrl: 'app/modules/login/views/login.html',
-        controller: 'loginController',
-        data: {
-            pageTitle: 'Login'
-        }
+        controller: 'loginController'
+    });
+
+    $stateProvider.state('register', {
+        url: '/register',
+        templateUrl: 'app/modules/login/views/register.html',
+        controller: 'registerController'
     });
 }]);
