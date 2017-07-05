@@ -50,6 +50,23 @@ class UserController extends Controller{
 
     return new Response($data);
   }
+  
+  /**
+    * @Route("/users/username={username}", requirements={"username":"[a-zA-Z0-9-]+"})
+    * @Method("GET")
+    */
+   public function getUserByUsernameAction($username){
+
+       $serializer = SerializerBuilder::create()->build();
+
+       $em = $this->getDoctrine()->getManager();
+       $objectUser = $em->getRepository(User::class)->loadUserByUsername($username);
+
+       $data = $serializer->serialize($objectUser, 'json');
+
+       return new Response($data);
+
+   }
 
  /**
  * @Route("/users")

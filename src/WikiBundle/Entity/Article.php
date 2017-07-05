@@ -52,6 +52,12 @@ class Article {
      * @Type("string")
      */
     private $pathname;
+    
+    /**
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="articles", cascade={"persist", "remove", "merge"})
+     * @Type("WikiBundle\Entity\User")
+     */
+    private $user;
 
     //GETTERS
     function getName() {
@@ -77,7 +83,12 @@ class Article {
     function getPathname() {
         return $this->pathname;
     }
+    
+    function getUser() {
+        return $this->user;
+    }
 
+    
     //SETTERS
     function setName($name) {
         $this->name = $name;
@@ -101,6 +112,10 @@ class Article {
 
     function setPathname($pathname) {
         $this->pathname = $pathname;
+    }
+
+    function setUser($user) {
+        $this->user = $user;
     }
 
 

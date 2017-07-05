@@ -71,6 +71,12 @@ class User implements UserInterface
      * @Type("WikiBundle\Entity\User")
      */
     private $role;
+    
+    /**
+     * @ORM\OneToMany(targetEntity="Article", mappedBy="user", cascade={"persist", "remove", "merge"})
+     * @Type("WikiBundle\Entity\Article")
+     */
+    private $articles;
 
 
     public function __construct() {
@@ -114,6 +120,10 @@ class User implements UserInterface
         return $this->role;
     }
 
+    function getArticles() {
+        return $this->articles;
+    }
+
     //SETTER
     function setId($id) {
         $this->id = $id;
@@ -150,7 +160,12 @@ class User implements UserInterface
     function setRole($role) {
         $this->role = $role;
     }
+    
+    function setArticles($articles) {
+        $this->articles = $articles;
+    }
 
+    
   /**
    * Set date_creation
    *
