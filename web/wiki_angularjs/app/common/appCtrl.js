@@ -44,16 +44,6 @@ function ($rootScope, $scope, $location, appSettings, $localStorage, $http, $sta
 
     console.log($scope.menuItems);
 
-    // for(var i=0 ; i<vm.menuItems.length ; i++){
-    //     if($scope.userRoles != vm.menuItems[i].permission){
-    //         $scope.item = true;
-    //     }
-    //     else{
-    //         $scope.item = null;
-    //     }
-    //    console.log($scope.item);
-    // }
-
     $scope.sideBar = function (value ) {
         if($(window).width()<=767){
         if ($("body").hasClass('sidebar-open'))
