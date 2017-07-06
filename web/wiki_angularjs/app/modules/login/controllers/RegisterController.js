@@ -27,7 +27,7 @@ login.controller("registerController", ['$rootScope', '$scope', '$state', '$http
 								console.log('erreur');
 								console.log(data);
 								console.log(status);
-								console.log(header);
+								console.log(headers);
 				      });
 						//console.log(parameter);
 				} else {
