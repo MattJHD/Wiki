@@ -1,0 +1,58 @@
+<!-- form edit utilisateur-->
+            <div class="row">
+
+                <md-dialog aria-label="Modification Utilisateur">
+                    <md-toolbar>
+                        <div class="md-toolbar-tools">
+                          <h1><span class="label label-primary">Modification Utilisateur</span></h1>
+                          <md-button class="md-icon-button" ng-click="cancel()">
+                            <md-icon aria-label="Close dialog"></md-icon>
+                          </md-button>
+                        </div>
+                    </md-toolbar>
+                    <md-dialog-content class="spacer" ng-repeat="user in thisUser"> 
+
+                        <form name="utilisateurForm" novalidate >  
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="firstname">prénom</label><input class="form-control" name="pname" type="text" ng-model="user.firstname" required >                  
+                                <div class="has-error" ng-show="utilisateurForm.$dirty">
+                                    <span ng-show="utilisateurForm.pname.$error.required">Ce champs est obligatoire!</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inlineFormInput">nom</label><input class="form-control" type="text" ng-model="user.lastname">
+                            </div>
+                            <div class="form-group">
+                                <label for="inlineFormInput">login</label><input class="form-control" type="text" ng-model="user.username">
+                            </div>
+                            <div class="form-group">
+                                <label for="inlineFormInput">email</label><input class="form-control" type="text" ng-model="user.email">
+                            </div>
+                            <div class="form-group" class="spacer">
+                                <select class="form-control" ng-model="user.role">
+                                    <option value="" disabled selected>---role---</option>
+                                    <option ng-repeat="role in roles" value="{{role}}" >
+                                        {{role.name}}
+                                    </option>
+                                </select>   
+                            </div>
+                        </div>
+
+                        <md-dialog-actions layout="row">
+                        
+                            <span flex></span>
+                            <button type="submit" class="btn btn-warning" ng-click="goEdit(user);">Modifier</button>
+                      
+                        </md-dialog-actions>
+
+
+                        </form>
+
+                    </md-dialog-content>
+
+                      
+                    
+                </md-dialog>
+            </div>
+    <!-- fin form edit utilisateur-->

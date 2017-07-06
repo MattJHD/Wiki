@@ -1,0 +1,59 @@
+<div class="row">
+    <md-dialog aria-label="Details Utilisateur">
+          <md-toolbar>
+              <div class="md-toolbar-tools" ng-repeat="user in thisUser">
+                <h1><span class="label label-primary">{{user.firstname}} {{user.lastname}}</span></h1>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                  <md-icon aria-label="Close dialog"></md-icon>
+                </md-button>
+              </div>
+          </md-toolbar>
+
+          <md-dialog-content ng-repeat="user in thisUser"> 
+
+          <div>  
+              <div class="col-sm-12">
+                  <div class="spacer">
+                      <div class="col-sm-4">id:</div>
+                      <div class="col-sm-8">
+                          <strong>{{user.id}}</strong>
+                      </div>   
+                  </div>
+                  <div class="spacer">
+                      <div class="col-sm-4">Nom:</div>
+                      <div class="col-sm-8">
+                          <strong>{{user.lastname}}</strong>
+                      </div>   
+                  </div>
+                  <div class="spacer">
+                      <div class="col-sm-4">Prénom:</div>
+                      <div class="col-sm-8">
+                          <strong>{{user.firstname}}</strong>
+                      </div>   
+                  </div>
+                  <div class="spacer">
+                      <div class="col-sm-4">Login:</div>
+                      <div class="col-sm-8">
+                          <strong>{{user.username}}</strong>
+                      </div>   
+                  </div>
+                  <div class="spacer">
+                      <div class="col-sm-4">Email:</div>
+                      <div class="col-sm-8">
+                          <strong>{{user.email}}</strong>
+                      </div>   
+                  </div>
+                  <div class="spacer">
+                      <div class="col-sm-4">Role:</div>
+                      <div class="col-sm-8">
+                          <strong>{{user.role.name}}</strong>
+                      </div>   
+                  </div>
+              </div>
+          </div>
+
+        </md-dialog-content>
+          
+    </md-dialog>
+
+</div>

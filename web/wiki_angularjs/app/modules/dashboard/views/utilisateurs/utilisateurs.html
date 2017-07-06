@@ -2,7 +2,7 @@
 
 <section class="content-header">
     <h1>Utilisateurs
-		<button type="button" class="btn btn-success" ng-if="Administrateur">
+		<button type="button" class="btn btn-success" ng-if="Administrateur" ng-click="addUser($event)">
 	      <i class="fa fa-plus" aria-hidden="true"></i>
 	    </button>
     </h1>
@@ -23,10 +23,10 @@
      <h1>
        {{user.firstname|capitalize}} {{user.lastname|capitalize}}
        <div class="float-right">
-         <button type="button" class="btn btn-primary" ng-if="Abonne || Administrateur || Auteur">
+         <button type="button" class="btn btn-primary" ng-if="Abonne || Administrateur || Auteur" ng-click="showUser($event, user.id)">
            <i class="fa fa-search" aria-hidden="true"></i>
          </button>
-         <button type="button" class="btn btn-info" ng-if="Administrateur">
+         <button type="button" class="btn btn-info" ng-if="Administrateur" ng-click="editUser($event, user.id)">
            <i class="fa fa-pencil" aria-hidden="true"></i>
          </button>
          <button type="button" class="btn btn-danger" ng-if="Administrateur">
