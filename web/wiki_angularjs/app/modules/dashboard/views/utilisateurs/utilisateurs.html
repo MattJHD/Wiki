@@ -1,10 +1,10 @@
 <div class="loader"></div>
 
 <section class="content-header">
-    <h1>Utilisateurs
-		<button type="button" class="btn btn-success" ng-if="Administrateur" ng-click="addUser($event)">
-	      <i class="fa fa-plus" aria-hidden="true"></i>
-	    </button>
+    <h1 style="width:65%!important; margin-left:10%!important">Utilisateurs
+      <button type="button" class="flat-button col-sm-9 float-right" ng-if="Administrateur" ng-click="addUser($event)">
+        Add
+      </button>
     </h1>
 
     <ol class="breadcrumb">
@@ -13,34 +13,37 @@
     </ol>
 </section>
 
-<div class="container" style="margin-top: 20px; margin-bottom: 20px;">
-	<div class="row panel" ng-repeat="user in users">
-    <div class="col-md-2  col-xs-12">
-     <img src="./assets/img/avatar_blank.png" class="img-thumbnail picture hidden-xs" />
-     <img src="./assets/img/avatar_blank.png" class="img-thumbnail visible-xs picture_mob" />
-    </div>
-    <div class="header col-md-8 col-xs-12">
-     <h1>
-       {{user.firstname|capitalize}} {{user.lastname|capitalize}}
-       <div class="float-right">
-         <button type="button" class="btn btn-primary" ng-if="Abonne || Administrateur || Auteur" ng-click="showUser($event, user.id)">
-           <i class="fa fa-search" aria-hidden="true"></i>
-         </button>
-         <button type="button" class="btn btn-info" ng-if="Administrateur" ng-click="editUser($event, user.id)">
-           <i class="fa fa-pencil" aria-hidden="true"></i>
-         </button>
-         <button type="button" class="btn btn-danger" ng-if="Administrateur">
-           <i class="fa fa-trash" aria-hidden="true"></i>
-         </button>
-       </div>
-     </h1>
 
-     <h4>{{user.email}}</h4>
-     <ul class="nav nav-pills" role="tablist">
-       <li role="presentation"><a href="#">{{user.role['name']}}</a></li>
-     </ul>
-     <span>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
-"There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."</span>
+<div class="container" style="margin-top: 20px; margin-bottom: 20px;">
+  <section class="content">
+  	<div class="row panel col-sm-9 col-sm-offset-1 no-padding" ng-repeat="user in users">
+      <div class="col-md-2  col-xs-12">
+       <img src="./assets/img/avatar_blank.png" class="img-thumbnail picture hidden-xs" />
+       <img src="./assets/img/avatar_blank.png" class="img-thumbnail visible-xs picture_mob" />
+      </div>
+      <div class="header col-md-8 col-xs-12">
+       <h1>
+         {{user.firstname|capitalize}} {{user.lastname|capitalize}}
+         <div class="float-right">
+           <button type="button" class="btn btn-primary" ng-if="Abonne || Administrateur || Auteur" ng-click="showUser($event, user.id)">
+             <i class="fa fa-search" aria-hidden="true"></i>
+           </button>
+           <button type="button" class="btn btn-info" ng-if="Administrateur" ng-click="editUser($event, user.id)">
+             <i class="fa fa-pencil" aria-hidden="true"></i>
+           </button>
+           <button type="button" class="btn btn-danger" ng-if="Administrateur">
+             <i class="fa fa-trash" aria-hidden="true"></i>
+           </button>
+         </div>
+       </h1>
+
+       <h4>{{user.email}}</h4>
+       <ul class="nav nav-pills" role="tablist">
+         <li role="presentation"><a href="#">{{user.role['name']}}</a></li>
+       </ul>
+       <!-- <span>Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+  "There is no one who loves pain itself, who seeks after it and wants to have it, simply because it is pain..."</span> -->
+      </div>
     </div>
+  </section>
   </div>
-</div>

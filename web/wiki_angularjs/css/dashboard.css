@@ -58,6 +58,41 @@ body {
   text-transform: uppercase;
   display: inline-block;
 }
+
+/*----------------------
+Product Card Styles
+----------------------*/
+.panel.panel--styled {
+    background: #fff;
+}
+.panelTop {
+    padding: 30px 0;
+}
+
+.panelBottom {
+    border-top: 1px solid #e7e7e7;
+    padding-top: 20px;
+}
+.btn-add-to-cart {
+    background: #FD5A5B;
+    color: #fff;
+}
+.btn.btn-add-to-cart.focus, .btn.btn-add-to-cart:focus, .btn.btn-add-to-cart:hover  {
+	color: #fff;
+    background: #FD7172;
+	outline: none;
+}
+.btn-add-to-cart:active {
+	background: #F9494B;
+	outline: none;
+}
+
+
+span.itemPrice {
+    font-size: 16px;
+    color: #367fa9;
+}
+
 .float-right{
   float: right;
   margin-top: -5px;
@@ -87,7 +122,54 @@ html{
 .dialogdemoBasicUsage .dialog-demo-prerendered md-checkbox {
   margin-bottom: 0; }
 
+  .morecontent span {
+      display: none;
+  }
+  .morelink {
+      display: block;
+  }
 
+  .flat-button {
+    position: relative;
+    width: 80px;
+    height: 30px;
+    background: #8bc34a;
+    margin: 0 auto;
+    /*margin-top: 40px;*/
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+    transition: color .3s;
+    /* Typo */
+    /*line-height: 60px;*/
+    text-align: center;
+    color: #fff;
+  }
+
+  .flat-button:after {
+    position: absolute;
+    top: 90%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #4caf50;
+    content: "";
+    z-index: -2;
+    transition: transform .3s;
+  }
+
+  .flat-button:hover::after {
+    transform: translateY(-80%);
+    transition: transform .3s;
+  }
+
+
+
+  .md-dialog-container {
+    left: 10%!important;
+    z-index: 9999!important;
+  }
+/* END MODIFS */
 /* Layout */
 .wrapper {
   min-height: 100%;
@@ -394,7 +476,8 @@ a:focus {
   padding: 7px 5px;
   position: absolute;
   top: 15px;
-  right: 10px;
+  /*right: 10px;*/
+  right: 7%;
   border-radius: 2px;
 }
 .content-header > .breadcrumb > li > a {

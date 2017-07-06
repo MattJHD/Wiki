@@ -1,6 +1,6 @@
 <div class="loader"></div>
 
-<section class="content-header">
+<!-- <section class="content-header">
     <h1>Thématiques
     <button type="button" class="btn btn-success" ng-if="Administrateur || Auteur" ng-click="addTheme($event)">
 	      <i class="fa fa-plus" aria-hidden="true"></i>
@@ -11,30 +11,45 @@
         <li><a><i class="fa fa-dashboard"></i>Dashboard</a></li>
         <li class="active">Thématiques</li>
     </ol>
+</section> -->
+
+<section class="content-header">
+    <h1 style="width:65%!important; margin-left:10%!important">Thématiques
+      <button type="button" class="flat-button col-sm-9 float-right" ng-if="Administrateur || Auteur" ng-click="addTheme($event)">
+        Add
+      </button>
+    </h1>
+
+    <ol class="breadcrumb">
+        <li><a><i class="fa fa-dashboard"></i>Dashboard</a></li>
+        <li class="active">Thématiques</li>
+    </ol>
 </section>
 
+<div class="container">
 
-<section class="content">
-  <div class="row">
-    <div class="panel panel-default col-sm-12 no-padding" ng-repeat="theme in themes">
-      <div class="panel-heading">
-        <h2 class="panel-title">{{theme.name}}</h2>
-          <div class="float-right">
-            <button type="button" class="btn btn-primary" ng-if="Abonne || Administrateur || Auteur" ng-click="showTheme($event, theme.id)">
-              <i class="fa fa-search" aria-hidden="true"></i>
-            </button>
-            <button type="button" class="btn btn-info" ng-if="Administrateur || Auteur" ng-click="editTheme($event, theme.id)">
-              <i class="fa fa-pencil" aria-hidden="true"></i>
-            </button>
-            <button type="button" class="btn btn-danger" ng-if="Administrateur">
-              <i class="fa fa-trash" aria-hidden="true"></i>
-            </button>
-          </div>
-      </div>
-      <div class="panel-body">
-        Thematique ajoutée par: {{theme.user['lastname']}} {{theme.user['firstname']}}
-      </div>
-    </div>
-  </div>
+           <section class="content">
+            <div class="row">
+              <div class="panel panel-default col-sm-9 col-sm-offset-1 no-padding" ng-repeat="theme in themes">
+                <div class="panel-heading">
+                  <h2 class="panel-title">{{theme.name}}</h2>
+                    <div class="float-right">
+                      <button type="button" class="btn btn-primary" ng-if="Abonne || Administrateur || Auteur" ng-click="showTheme($event, theme.id)">
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                      </button>
+                      <button type="button" class="btn btn-info" ng-if="Administrateur || Auteur" ng-click="editTheme($event, theme.id)">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                      </button>
+                      <button type="button" class="btn btn-danger" ng-if="Administrateur">
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      </button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                  Thematique ajoutée par: {{theme.user['lastname']}} {{theme.user['firstname']}}
+                </div>
+              </div>
+            </div>
 
-</section>
+          </section>
+      </div>
