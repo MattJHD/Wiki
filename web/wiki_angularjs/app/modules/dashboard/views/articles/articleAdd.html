@@ -1,0 +1,58 @@
+<!-- form add user-->
+            <div class="row">
+
+                <md-dialog aria-label="Ajout Article">
+                    <md-toolbar>
+                        <div class="md-toolbar-tools">
+                          <h1><span class="label label-primary">Ajout Article</span></h1>
+                          <md-button class="md-icon-button" ng-click="cancel()">
+                            <md-icon aria-label="Close dialog"></md-icon>
+                          </md-button>
+                        </div>
+                    </md-toolbar>
+                    <md-dialog-content class="spacer"> 
+
+                        <form name="articleForm" novalidate >  
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="name">name</label><input class="form-control" name="pname" type="text" ng-model="article.name" required >                  
+                                <div class="has-error" ng-show="articleForm.$dirty">
+                                    <span ng-show="articleForm.pname.$error.required">Ce champs est obligatoire!</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inlineFormInput">description</label><input class="form-control" type="textarea" ng-model="article.description">
+                            </div>
+                            <div class="form-group">
+                                <label for="inlineFormInput">date création</label><input class="form-control" type="text" ng-model="article.date_creation">
+                            </div>
+                            <div class="form-group">
+                                <label for="inlineFormInput">file</label><input class="form-control" type="file" ng-model="article.pathname">
+                            </div>
+                            <div class="form-group" class="spacer">
+                                <select class="form-control" multiple ng-model="article.themes">
+                                    <option value="" disabled selected>---Themes---</option>
+                                    <option ng-repeat="theme in themes" value="{{theme}}" >
+                                        {{theme.name}}
+                                    </option>
+                                </select>   
+                            </div>
+                        </div>
+
+                        <md-dialog-actions layout="row">
+                        
+                            <span flex></span>
+                            <button type="submit" class="btn btn-success" ng-click="goAdd(article);">Ajouter</button>
+                      
+                        </md-dialog-actions>
+
+
+                        </form>
+
+                    </md-dialog-content>
+
+                      
+                    
+                </md-dialog>
+            </div>
+    <!-- fin form add user-->

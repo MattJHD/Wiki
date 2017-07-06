@@ -46,6 +46,79 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 
         };
 
+    //add article
+	$scope.addArticle = function($event){
+		
+		$mdDialog.show({
+            controller: modalAddController,
+            templateUrl: 'app/modules/dashboard/views/articles/articleAdd.html',
+            parent: angular.element(document.body),
+            targetEvent: $event,
+            clickOutsideToClose:true,
+            fullscreen: $scope.customFullscreen // Only for -xs, -sm breakpoints.
+          })
+          .then(function(answer) {
+            $scope.status = 'ok';
+          });
+
+      	function modalAddController($scope, $mdDialog, $http) {
+
+			$http.get(backend + "themes").then(function(response){
+				$scope.themes = response.data;
+				console.log($scope.themes);
+			});
+
+			$scope.hide = function() {
+			  $mdDialog.hide();
+			};
+
+			$scope.cancel = function() {
+			  $mdDialog.cancel();
+			};
+
+			$scope.goAdd = function(thisArticle){
+				console.log(thisArticle);
+				var themes = [];
+				for(var i = 0; i<thisArticle.themes.length; i++){
+					var dataTheme = JSON.parse(thisArticle.themes[i]); 
+					themes.push(dataTheme);
+				}
+
+				var dataArticle = new Object();
+					dataArticle.id = "";
+					dataArticle.name = thisArticle.name;
+					dataArticle.description = thisArticle.description;
+					dataArticle.date_creation = thisArticle.date_creation;
+					dataArticle.pathname = "";
+					dataArticle.user = {};
+					dataArticle.themes = themes;
+
+				var jsonArticle = JSON.stringify(dataArticle);
+				console.log(jsonArticle);
+
+				$http({
+					url: backend + "articles", 
+					method: 'POST',
+					data: jsonArticle, 
+					headers: { 'content-type': 'application/json' }
+				}).success(function(data, status, headers, config, answer){
+					$scope.PostDataResponse = data;
+					console.log($scope.PostDataResponse);
+					location.reload();
+				}).error(function (data, status, header, config) {
+	                $scope.ResponseDetails = "Data: " + data +
+	                    "<hr />status: " + status +
+	                    "<hr />headers: " + header +
+	                    "<hr />config: " + config;
+	            });
+
+
+
+			}
+		}
+
+    };
+
     //edit article
 	$scope.editArticle = function($event, id){
 		
