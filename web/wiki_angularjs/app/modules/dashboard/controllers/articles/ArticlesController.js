@@ -1,5 +1,5 @@
-dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$mdDialog', '$localStorage',
-	function($scope, $http, appSettings, $mdDialog, $localStorage){
+dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$mdDialog', '$localStorage', 'textAngularManager',
+	function($scope, $http, appSettings, $mdDialog, $localStorage, textAngularManager){
 
 		var backend = appSettings.backend;
 		//console.log($localStorage);
@@ -10,6 +10,8 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 			 $scope.articles = response.data;
 			 console.log($scope.articles);
 		});
+
+		
 
 		//datetime
 		function zero(num, size) {

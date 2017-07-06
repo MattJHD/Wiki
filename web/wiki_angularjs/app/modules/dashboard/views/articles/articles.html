@@ -76,7 +76,7 @@
 
 							<div class="col-md-12">
 
-								<p>{{article.description | cut:true:450:' ...'}}</p>
+								<div ng-bind-html="article.description">{{article.description | cut:true:450:' ...'}}</div>
 							</div>
 						</div>
 
