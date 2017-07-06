@@ -1,0 +1,65 @@
+<div class="row">
+    <md-dialog aria-label="Details Article">
+          <md-toolbar>
+              <div class="md-toolbar-tools" ng-repeat="article in thisArticle">
+                <h1><span class="label label-primary">{{article.name}}</span></h1>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                  <md-icon aria-label="Close dialog"></md-icon>
+                </md-button>
+              </div>
+          </md-toolbar>
+
+          <md-dialog-content ng-repeat="article in thisArticle"> 
+
+          <div>  
+              <div class="col-sm-12">
+                  <div class="spacer">
+                      <div class="col-sm-4">id:</div>
+                      <div class="col-sm-8">
+                          <strong>{{article.id}}</strong>
+                      </div>   
+                  </div>
+                  <div class="spacer">
+                      <div class="col-sm-4">Nom:</div>
+                      <div class="col-sm-8">
+                          <strong>{{article.name}}</strong>
+                      </div>   
+                  </div>
+                  <div class="spacer">
+                      <div class="col-sm-4">Description:</div>
+                      <div class="col-sm-8">
+                          <strong>{{article.description}}</strong>
+                      </div>   
+                  </div>
+                  <div class="spacer">
+                      <div class="col-sm-4">Date création:</div>
+                      <div class="col-sm-8">
+                          <strong>{{article.date_creation}}</strong>
+                      </div>   
+                  </div>
+                  <!-- <div class="form-group" class="spacer">
+                      <div class="col-sm-4">File:</div>
+                      <div class="col-sm-8">
+                          <strong>{{article.pathname}}</strong>
+                      </div>   
+                  </div> -->
+                  <div class="form-group" class="spacer">
+                      <div class="col-sm-4">Posté par:</div>
+                      <div class="col-sm-8">
+                          <strong>{{article.user}}</strong>
+                      </div>   
+                  </div>
+                  <div class="form-group" class="spacer">
+                      <div class="col-sm-4">Theme(s):</div>
+                      <div class="col-sm-8" ng-repeat="theme in article.themes">
+                          <strong>{{theme.name}}</strong>
+                      </div>   
+                  </div>
+              </div>
+          </div>
+
+        </md-dialog-content>
+          
+    </md-dialog>
+
+</div>
