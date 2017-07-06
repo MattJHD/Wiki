@@ -1,7 +1,11 @@
 <div class="loader"></div>
 
 <section class="content-header">
-    <h1>Utilisateurs</h1>
+    <h1>Utilisateurs
+		<button type="button" class="btn btn-success" ng-if="Administrateur">
+	      <i class="fa fa-plus" aria-hidden="true"></i>
+	    </button>
+    </h1>
 
     <ol class="breadcrumb">
         <li><a><i class="fa fa-dashboard"></i>Dashboard</a></li>
@@ -19,13 +23,13 @@
      <h1>
        {{user.firstname|capitalize}} {{user.lastname|capitalize}}
        <div class="float-right">
-         <button type="button" class="btn btn-primary">
+         <button type="button" class="btn btn-primary" ng-if="Abonne || Administrateur || Auteur">
            <i class="fa fa-search" aria-hidden="true"></i>
          </button>
-         <button type="button" class="btn btn-info">
+         <button type="button" class="btn btn-info" ng-if="Administrateur">
            <i class="fa fa-pencil" aria-hidden="true"></i>
          </button>
-         <button type="button" class="btn btn-danger">
+         <button type="button" class="btn btn-danger" ng-if="Administrateur">
            <i class="fa fa-trash" aria-hidden="true"></i>
          </button>
        </div>

@@ -9,11 +9,11 @@ function ($rootScope, $scope, $location, appSettings, $localStorage, $http, $sta
     $scope.today = new Date();
 
     $scope.userName =  $localStorage.currentUser.data.username;
-
+    console.log($localStorage.currentUser);
 
     $scope.appTitle = [
         {
-            name: "Wikitema",
+            name: "Wiki'tema",
             shortname: "WK",
             state: "app"
         }
@@ -79,5 +79,17 @@ function ($rootScope, $scope, $location, appSettings, $localStorage, $http, $sta
         $state.go('home');
     };
 
+    function checkRole(arr, val) {
+        return arr.some(function(arrVal) {
+            return val === arrVal.name;
+        });
+    };
+
+    var arrayRole = [];
+    arrayRole.push($localStorage.currentUser.data.role);
+
+    $scope.Administrateur = checkRole(arrayRole, 'Administrateur');
+    $scope.Auteur = checkRole(arrayRole, 'Auteur');
+    $scope.Abonne = checkRole(arrayRole, 'Abonne');
 
 }]);

@@ -17,7 +17,7 @@ home.controller("homeController", ['$rootScope', '$scope', '$state', '$statePara
 
 		    $scope.appTitle = [
 		        {
-		            name: "Wikitema",
+		            name: "Wiki'tema",
 		            shortname: "WK",
 		            state: "app"
 		        }

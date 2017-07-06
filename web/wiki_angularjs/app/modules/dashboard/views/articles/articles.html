@@ -2,10 +2,11 @@
 
 <section class="content-header">
   <h1>Articles
-    <button type="button" class="btn btn-success">
+    <button type="button" class="btn btn-success" ng-if="Administrateur || Auteur">
       <i class="fa fa-plus" aria-hidden="true"></i>
     </button>
   </h1>
+  
   <ol class="breadcrumb">
       <li><a><i class="fa fa-dashboard"></i>Dashboard</a></li>
       <li class="active">Articles</li>
@@ -18,13 +19,13 @@
       <div class="panel-heading">
         <h2 class="panel-title">{{article.name}}</h2>
           <div class="float-right">
-            <button type="button" class="btn btn-primary">
+            <button type="button" class="btn btn-primary" ng-if="Abonne || Administrateur || Auteur">
               <i class="fa fa-search" aria-hidden="true"></i>
             </button>
-            <button type="button" class="btn btn-info">
+            <button type="button" class="btn btn-info" ng-if="Administrateur || Auteur">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </button>
-            <button type="button" class="btn btn-danger">
+            <button type="button" class="btn btn-danger" ng-if="Administrateur">
               <i class="fa fa-trash" aria-hidden="true"></i>
             </button>
           </div>
