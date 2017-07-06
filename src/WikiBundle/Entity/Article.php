@@ -24,7 +24,7 @@ class Article {
     private $name;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="text")
      * @Type("string")
      */
     private $description;
