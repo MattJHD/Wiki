@@ -39,8 +39,8 @@ class ArticleRepository extends EntityRepository{
     $creationDate = $article->getDate_creation()->format('Y-m-d h:m:s');
 
     $RAW_QUERY = 'INSERT
-                  INTO ARTICLE (name, description, date_creation, pathname)
-                  VALUES ("'.$article->getName().'", "'.$article->getDescription().'", "'.$creationDate.'", "'.$article->getPathname().'");';
+                  INTO ARTICLE (name, user_id, description, date_creation, pathname)
+                  VALUES ("'.$article->getName().'", "'.$article->getUser()->getId().'",  "'.$article->getDescription().'", "'.$creationDate.'", "'.$article->getPathname().'");';
     $statement = $em->getConnection()->prepare($RAW_QUERY);
     $result = $statement->execute();
     return $result;
@@ -67,6 +67,7 @@ class ArticleRepository extends EntityRepository{
 
   // Query - Update Article in Db
   public function updateArticle($id, $article){
+    $user_id = $article->getUser()->getId();
     $name = $article->getName();
     $description = $article->getDescription();
     $date_creation = $article->getDate_creation();
@@ -75,12 +76,14 @@ class ArticleRepository extends EntityRepository{
 
     $qb = $this->_em->createQueryBuilder()
               ->update("WikiBundle:Article", "article")
+              ->set("article.user", ":user_id")
               ->set("article.name", ":name")
               ->set("article.description", ":description")
               ->set("article.date_creation", ":date_creation")
               ->set("article.pathname", ":pathname")
               ->andWhere("article.id = :id")
               ->setParameter("id", $id)
+              ->setParameter("user_id", $user_id)
               ->setParameter("name", $name)
               ->setParameter("description", $description)
               ->setParameter("date_creation", $date_creation)
