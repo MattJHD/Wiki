@@ -76,30 +76,30 @@ class UserController extends Controller{
     $serializer = SerializerBuilder::create()->build();
     $jsonData = $request->getContent();
     $user = $serializer->deserialize($jsonData, User::class, 'json');
-     
+
     $user->setRawPassword($user->getPassword());
-    
+
     $errors = $this->get("validator")->validate($user);
 
     if(count($errors) == 0){
       $em = $this->getDoctrine()->getManager();
-      
-      
+
+
       $encodedPassword = $this->get('encoder.password')->encode($user);
-      
+
       $password = $user->getPassword();
-  
+
       // We call the function to create a user
       $em->getRepository(User::class)->createUser($em, $user, $password);
-      
-      $this->get('mailer.contact_mailer')->sendPwd($user);
+
+      //$this->get('mailer.contact_mailer')->sendPwd($user);
 
       return new JsonResponse("OK");
     }else{
       return $errors;
     }
   }
-  
+
  /**
  * @Route("/users")
  * @Method("POST")
@@ -108,27 +108,32 @@ class UserController extends Controller{
     $serializer = SerializerBuilder::create()->build();
     $jsonData = $request->getContent();
     $user = $serializer->deserialize($jsonData, User::class, 'json');
-    
-    $user->setRawPassword(uniqid());
 
-    $errors = $this->get("validator")->validate($user);
+    // We get the current user in session
+    $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
-    if(count($errors) == 0){
-      $em = $this->getDoctrine()->getManager();
+    // We check that the user is an admin
+    // If yes, he can create another user, if not, he can't
+    if($currentUser->getRole()->getId() == 1){
+      $user->setRawPassword(uniqid());
 
+      $errors = $this->get("validator")->validate($user);
 
-      $encodedPassword = $this->get('encoder.password')->encode($user);
+      if(count($errors) == 0){
+        $em = $this->getDoctrine()->getManager();
+        $encodedPassword = $this->get('encoder.password')->encode($user);
+        $password = $user->getPassword();
 
-      $password = $user->getPassword();
+        // We call the function to create a user
+        $em->getRepository(User::class)->createUser($em, $user, $password);
+        $this->get('mailer.contact_mailer')->sendPwd($user);
 
-      // We call the function to create a user
-      $em->getRepository(User::class)->createUser($em, $user, $password);
-
-      $this->get('mailer.contact_mailer')->sendPwd($user);
-
-      return new JsonResponse("OK");
-    }else{
-      return $errors;
+        return new JsonResponse("OK");
+      }else{
+        return $errors;
+      }
+    } else {
+      return new JsonResponse("ADMIN ROLE NEEDED FOR USER CREATION");
     }
   }
 
@@ -143,14 +148,23 @@ class UserController extends Controller{
     $user = $serializer->deserialize($jsonData, User::class, 'json');
     $errors = $this->get("validator")->validate($user);
 
-    if (count($errors) == 0) {
-      $em = $this->getDoctrine()->getManager();
-      // We call the function to update a user
-      $em->getRepository(User::class)->updateUser($id, $user);
+    // We get the current user in session
+    $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
-      return new JsonResponse("OK UPDATE");
+    // We check that the user is an admin
+    // If yes, he can update another user, if not, he can't
+    if($currentUser->getRole()->getId() == 1){
+      if (count($errors) == 0) {
+        $em = $this->getDoctrine()->getManager();
+        // We call the function to update a user
+        $em->getRepository(User::class)->updateUser($id, $user);
+
+        return new JsonResponse("OK UPDATE");
+      } else {
+        return new JsonResponse("ERROR-NOT-VALID");
+      }
     } else {
-      return new JsonResponse("ERROR-NOT-VALID");
+      return new JsonResponse("ADMIN ROLE NEEDED FOR USER UPDATE");
     }
   }
 
@@ -164,15 +178,23 @@ class UserController extends Controller{
     $jsonData = $request->getContent();
     $user = $serializer->deserialize($jsonData, User::class, 'json');
     $errors = $this->get("validator")->validate($user);
+    // We get the current user in session
+    $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
-    if (count($errors) == 0) {
-      $em = $this->getDoctrine()->getManager();
-      // We call the function to delete a user
-      $em->getRepository(User::class)->deleteUser($id, $user);
+    // We check that the user is an admin
+    // If yes, he can update another user, if not, he can't
+    if($currentUser->getRole()->getId() == 1){
+      if (count($errors) == 0) {
+        $em = $this->getDoctrine()->getManager();
+        // We call the function to delete a user
+        $em->getRepository(User::class)->deleteUser($id, $user);
 
-      return new JsonResponse("OK - USER DELETED");
+        return new JsonResponse("OK - USER DELETED");
+      } else {
+        return new JsonResponse("ERROR-NOT-VALID");
+      }
     } else {
-      return new JsonResponse("ERROR-NOT-VALID");
+      return new JsonResponse("ADMIN ROLE NEEDED TO DELETE USER");
     }
   }
 }

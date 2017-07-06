@@ -34,13 +34,13 @@ class ArticleRepository extends EntityRepository{
   }
 
   // Query - Insert Article in Db
-  public function createArticle($em, $article){
+  public function createArticle($em, $article, $currentUser){
     // We need to convert date from DateTime Format to String
     $creationDate = $article->getDate_creation()->format('Y-m-d h:m:s');
 
     $RAW_QUERY = 'INSERT
                   INTO ARTICLE (name, user_id, description, date_creation, pathname)
-                  VALUES ("'.$article->getName().'", "'.$article->getUser()->getId().'",  "'.$article->getDescription().'", "'.$creationDate.'", "'.$article->getPathname().'");';
+                  VALUES ("'.$article->getName().'", "'.$currentUser->getId().'",  "'.$article->getDescription().'", "'.$creationDate.'", "'.$article->getPathname().'");';
     $statement = $em->getConnection()->prepare($RAW_QUERY);
     $result = $statement->execute();
     return $result;

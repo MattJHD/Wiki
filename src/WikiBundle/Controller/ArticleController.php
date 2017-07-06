@@ -57,16 +57,23 @@ class ArticleController extends Controller{
     $jsonData = $request->getContent();
     $article = $serializer->deserialize($jsonData, Article::class, 'json');
     $errors = $this->get("validator")->validate($article);
+    // We get the current user in session
+    $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
-    if(count($errors) == 0){
-      $em = $this->getDoctrine()->getManager();
-      $em->getRepository(Article::class)->createArticle($em, $article);
-      // We associate Themes to the new Article
-      $em->getRepository(Article::class)->createArticleTheme($em, $article);
+    // Create an article if role < 3 (1 = admin, 2 = auteur)
+    if($currentUser->getRole()->getId() <= 2){
+      if(count($errors) == 0){
+        $em = $this->getDoctrine()->getManager();
+        $em->getRepository(Article::class)->createArticle($em, $article, $currentUser);
+        // We associate Themes to the new Article
+        $em->getRepository(Article::class)->createArticleTheme($em, $article, $currentUser);
 
-      return new JsonResponse("OK");
-    }else{
-      return $errors;
+        return new JsonResponse("OK");
+      }else{
+        return $errors;
+      }
+    } else{
+      return new JsonResponse("ADMIN OR AUTEUR ROLE NEEDED FOR ARTICLE CREATION");
     }
   }
 
@@ -80,16 +87,23 @@ class ArticleController extends Controller{
     $jsonData = $request->getContent();
     $article = $serializer->deserialize($jsonData, Article::class, 'json');
     $errors = $this->get("validator")->validate($article);
+    // We get the current user in session
+    $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
-    if (count($errors) == 0) {
-      $em = $this->getDoctrine()->getManager();
-      $em->getRepository(Article::class)->updateArticle($id, $article);
-      // We update associated Themes to the updated Article
-      $em->getRepository(Article::class)->updateArticleTheme($em, $article);
+    // We update an article if the role is 'Administrateur' or if the role is 'Auteur' and it is the author of the article
+    if(($currentUser->getRole()->getId() == 1) || ($currentUser->getId() == $article->getUser()->getId() && $currentUser->getRole()->getId() <= 2)){
+      if (count($errors) == 0) {
+        $em = $this->getDoctrine()->getManager();
+        $em->getRepository(Article::class)->updateArticle($id, $article);
+        // We update associated Themes to the updated Article
+        $em->getRepository(Article::class)->updateArticleTheme($em, $article);
 
-      return new JsonResponse("OK UPDATE");
+        return new JsonResponse("OK UPDATE");
+      } else {
+        return new JsonResponse("ERROR-NOT-VALID");
+      }
     } else {
-      return new JsonResponse("ERROR-NOT-VALID");
+      return new JsonResponse("YOU MUST BE ADMIN TO UPDATE AN ARTICLE OR AUTHOR TO UPDATE YOUR ARTICLES");
     }
   }
 
@@ -103,15 +117,23 @@ class ArticleController extends Controller{
     $jsonData = $request->getContent();
     $article = $serializer->deserialize($jsonData, Article::class, 'json');
     $errors = $this->get("validator")->validate($article);
+    // We get the current user in session
+    $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
-    if (count($errors) == 0) {
-      $em = $this->getDoctrine()->getManager();
-      // We call the function to delete an article
-      $em->getRepository(Article::class)->deleteArticle($id, $article);
+    // Create an article if role < 3 (1 = admin, 2 = auteur)
+    if($currentUser->getRole()->getId() == 1){
 
-      return new JsonResponse("OK - ARTICLE DELETED");
+      if (count($errors) == 0) {
+        $em = $this->getDoctrine()->getManager();
+        // We call the function to delete an article
+        $em->getRepository(Article::class)->deleteArticle($id, $article);
+
+        return new JsonResponse("OK - ARTICLE DELETED");
+      } else {
+        return new JsonResponse("ERROR-NOT-VALID");
+      }
     } else {
-      return new JsonResponse("ERROR-NOT-VALID");
+      return new JsonResponse("YOU MUST BE ADMIN TO DELETE ARTICLES");
     }
   }
 }

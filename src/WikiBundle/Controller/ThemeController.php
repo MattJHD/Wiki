@@ -58,14 +58,21 @@ class ThemeController extends Controller{
     $jsonData = $request->getContent();
     $theme = $serializer->deserialize($jsonData, Theme::class, 'json');
     $errors = $this->get("validator")->validate($theme);
+    // We get the current user in session
+    $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
-    if(count($errors) == 0){
-      $em = $this->getDoctrine()->getManager();
-      $em->getRepository(Theme::class)->createTheme($em, $theme);
+    // Create an article if role < 3 (1 = admin, 2 = auteur)
+    if($currentUser->getRole()->getId() == 1){
+      if(count($errors) == 0){
+        $em = $this->getDoctrine()->getManager();
+        $em->getRepository(Theme::class)->createTheme($em, $theme, $currentUser);
 
-      return new JsonResponse("OK");
-    }else{
-        return $errors;
+        return new JsonResponse("OK");
+      }else{
+          return $errors;
+      }
+    } else {
+        return new JsonResponse("YOU MUST BE ADMIN TO CREATE NEW THEMES");
     }
   }
 
@@ -79,14 +86,21 @@ class ThemeController extends Controller{
     $jsonData = $request->getContent();
     $theme = $serializer->deserialize($jsonData, Theme::class, 'json');
     $errors = $this->get("validator")->validate($theme);
+    // We get the current user in session
+    $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
-    if (count($errors) == 0) {
-      $em = $this->getDoctrine()->getManager();
-      $em->getRepository(Theme::class)->updateTheme($id, $theme);
+    // Create an article if role < 3 (1 = admin, 2 = auteur)
+    if($currentUser->getRole()->getId() == 1){
+      if (count($errors) == 0) {
+        $em = $this->getDoctrine()->getManager();
+        $em->getRepository(Theme::class)->updateTheme($id, $theme);
 
-      return new JsonResponse("OK UPDATE");
+        return new JsonResponse("OK UPDATE");
+      } else {
+        return new JsonResponse("ERROR-NOT-VALID");
+      }
     } else {
-      return new JsonResponse("ERROR-NOT-VALID");
+        return new JsonResponse("YOU MUST BE ADMIN TO UPDATE THEMES");
     }
   }
 
@@ -100,15 +114,22 @@ class ThemeController extends Controller{
     $jsonData = $request->getContent();
     $theme = $serializer->deserialize($jsonData, Theme::class, 'json');
     $errors = $this->get("validator")->validate($theme);
+    // We get the current user in session
+    $currentUser = $this->get('security.token_storage')->getToken()->getUser();
 
-    if (count($errors) == 0) {
-      $em = $this->getDoctrine()->getManager();
-      // We call the function to delete a theme
-      $em->getRepository(Theme::class)->deleteTheme($id, $theme);
+    // Create an article if role < 3 (1 = admin, 2 = auteur)
+    if($currentUser->getRole()->getId() == 1){
+      if (count($errors) == 0) {
+        $em = $this->getDoctrine()->getManager();
+        // We call the function to delete a theme
+        $em->getRepository(Theme::class)->deleteTheme($id, $theme);
 
-      return new JsonResponse("OK - THEME DELETED");
+        return new JsonResponse("OK - THEME DELETED");
+      } else {
+        return new JsonResponse("ERROR-NOT-VALID");
+      }
     } else {
-      return new JsonResponse("ERROR-NOT-VALID");
+      return new JsonResponse("YOU MUST BE ADMIN TO DELETE THEMES");
     }
   }
 }
