@@ -14,26 +14,22 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 		//datetime
 		function zero(num, size) {
 		    var s = num;
-		    if (parseInt(s) < parseInt(size)) s = "0" + s;
+		    if (parseInt(s) < parseInt(size)) s = "0" + s;	
 		    return s;
 		}
-		var currentdate = new Date();
+		var currentdate = new Date(); 
 		var datetimeNow =  currentdate.getFullYear() + "-"
-						+ zero((currentdate.getMonth()+1),10)  + "-"
+						+ zero((currentdate.getMonth()+1),10)  + "-" 
 						+ zero(currentdate.getDate(), 10);
         console.log(datetimeNow);
-<<<<<<< HEAD
 		
-=======
-
->>>>>>> 6cefdd2e5b5427ba68ca08c7cfb73a8a4358d08c
         //CRUD
 		$scope.status = '  ';
   		$scope.customFullscreen = true;
 
 		//détails article
 		$scope.showArticle = function($event, id){
-
+			
 			$mdDialog.show({
 	          	locals: {id: id},
 	            controller: modalController,
@@ -69,7 +65,7 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 
 			//add article
 			$scope.addArticle = function($event){
-
+				
 				$mdDialog.show({
 		            controller: modalAddController,
 		            templateUrl: 'app/modules/dashboard/views/articles/articleAdd.html',
@@ -101,7 +97,7 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 						console.log(thisArticle);
 						var themes = [];
 						for(var i = 0; i<thisArticle.themes.length; i++){
-							var dataTheme = JSON.parse(thisArticle.themes[i]);
+							var dataTheme = JSON.parse(thisArticle.themes[i]); 
 							themes.push(dataTheme);
 						}
 
@@ -118,9 +114,9 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 						console.log(jsonArticle);
 
 						$http({
-							url: backend + "articles",
+							url: backend + "articles", 
 							method: 'POST',
-							data: jsonArticle,
+							data: jsonArticle, 
 							headers: { 'content-type': 'application/json' }
 						}).success(function(data, status, headers, config, answer){
 							$scope.PostDataResponse = data;
@@ -142,7 +138,7 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 
 		    //edit article
 			$scope.editArticle = function($event, id){
-
+				
 				$mdDialog.show({
 		          	locals: {id: id},
 		            controller: modalEditController,
@@ -179,7 +175,7 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 						console.log(thisArticle);
 						var themes = [];
 						for(var i = 0; i<thisArticle.themes.length; i++){
-							var dataTheme = JSON.parse(thisArticle.themes[i]);
+							var dataTheme = JSON.parse(thisArticle.themes[i]); 
 							themes.push(dataTheme);
 						}
 
@@ -196,9 +192,9 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 						console.log(jsonArticle);
 
 						$http({
-							url: backend + "articles/" + id,
+							url: backend + "articles/" + id, 
 							method: 'PUT',
-							data: jsonArticle,
+							data: jsonArticle, 
 							headers: { 'content-type': 'application/json' }
 						}).success(function(data, status, headers, config, answer){
 							$scope.PostDataResponse = data;
@@ -223,6 +219,6 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 
 		})
 
-
+    
 
 }]);
