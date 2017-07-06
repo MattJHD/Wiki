@@ -68,11 +68,43 @@ class UserController extends Controller{
 
    }
 
+   /**
+ * @Route("/creation")
+ * @Method("POST")
+ */
+  public function postUserByUserAction(Request $request){
+    $serializer = SerializerBuilder::create()->build();
+    $jsonData = $request->getContent();
+    $user = $serializer->deserialize($jsonData, User::class, 'json');
+     
+    $user->setRawPassword($user->getPassword());
+    
+    $errors = $this->get("validator")->validate($user);
+
+    if(count($errors) == 0){
+      $em = $this->getDoctrine()->getManager();
+      
+      
+      $encodedPassword = $this->get('encoder.password')->encode($user);
+      
+      $password = $user->getPassword();
+  
+      // We call the function to create a user
+      $em->getRepository(User::class)->createUser($em, $user, $password);
+      
+      $this->get('mailer.contact_mailer')->sendPwd($user);
+
+      return new JsonResponse("OK");
+    }else{
+      return $errors;
+    }
+  }
+  
  /**
  * @Route("/users")
  * @Method("POST")
  */
-  public function postUserAction(Request $request){
+  public function postUserByAdminAction(Request $request){
     $serializer = SerializerBuilder::create()->build();
     $jsonData = $request->getContent();
     $user = $serializer->deserialize($jsonData, User::class, 'json');

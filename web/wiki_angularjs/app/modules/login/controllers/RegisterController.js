@@ -9,14 +9,13 @@ login.controller("registerController", ['$rootScope', '$scope', '$state', '$http
 
 				let parameter = JSON.stringify({id:"", role:{name:"Abonne", users:[], id:"3"}, firstname:user.firstname, lastname: user.lastname, username:user.username, salt:"", password:user.password, email: user.email, articles:[]});
 				let backend = appSettings.backend;
-				let url = backend + "users";
+				let url = backend + "creation";
 
 				console.log(parameter);
 					// We POST
 			    $http.post(url, parameter).
 			    success(function(data, status, headers, config) {
-			        // this callback will be called asynchronously
-			        // when the response is available
+			        $state.go('home');
 			        console.log(data);
 			      }).
 			      error(function(data, status, headers, config) {
