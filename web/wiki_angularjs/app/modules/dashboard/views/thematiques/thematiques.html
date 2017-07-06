@@ -2,7 +2,7 @@
 
 <section class="content-header">
     <h1>Thématiques
-    	<button type="button" class="btn btn-success" ng-if="Administrateur || Auteur">
+    <button type="button" class="btn btn-success" ng-if="Administrateur || Auteur" ng-click="addTheme($event)">
 	      <i class="fa fa-plus" aria-hidden="true"></i>
 	    </button>
     </h1>
@@ -20,10 +20,10 @@
       <div class="panel-heading">
         <h2 class="panel-title">{{theme.name}}</h2>
           <div class="float-right">
-            <button type="button" class="btn btn-primary" ng-if="Abonne || Administrateur || Auteur">
+            <button type="button" class="btn btn-primary" ng-if="Abonne || Administrateur || Auteur" ng-click="showTheme($event, theme.id)">
               <i class="fa fa-search" aria-hidden="true"></i>
             </button>
-            <button type="button" class="btn btn-info" ng-if="Administrateur || Auteur">
+            <button type="button" class="btn btn-info" ng-if="Administrateur || Auteur" ng-click="editTheme($event, theme.id)">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </button>
             <button type="button" class="btn btn-danger" ng-if="Administrateur">

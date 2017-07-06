@@ -1,0 +1,41 @@
+<!-- form edit theme-->
+            <div class="row">
+
+                <md-dialog aria-label="Modification Theme">
+                    <md-toolbar>
+                        <div class="md-toolbar-tools">
+                          <h1><span class="label label-primary">Modification Theme</span></h1>
+                          <md-button class="md-icon-button" ng-click="cancel()">
+                            <md-icon aria-label="Close dialog"></md-icon>
+                          </md-button>
+                        </div>
+                    </md-toolbar>
+                    <md-dialog-content class="spacer" ng-repeat="theme in thisTheme"> 
+
+                        <form name="themeForm" novalidate >  
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="name">name</label><input class="form-control" name="pname" type="text" ng-model="theme.name" required >                  
+                                <div class="has-error" ng-show="themeForm.$dirty">
+                                    <span ng-show="themeForm.pname.$error.required">Ce champs est obligatoire!</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <md-dialog-actions layout="row">
+                        
+                            <span flex></span>
+                            <button type="submit" class="btn btn-warning" ng-click="goEdit(theme);">Modifier</button>
+                      
+                        </md-dialog-actions>
+
+
+                        </form>
+
+                    </md-dialog-content>
+
+                      
+                    
+                </md-dialog>
+            </div>
+            <!-- fin form edit theme-->
