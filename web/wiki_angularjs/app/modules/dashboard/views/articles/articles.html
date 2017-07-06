@@ -1,6 +1,6 @@
 <div class="loader"></div>
 
-<section class="content-header">
+<section class="content-header col-sm-9 col-sm-offset-1">
   <h1>Articles
     <button type="button" class="btn btn-success" ng-if="Administrateur || Auteur" ng-click="addArticle($event)">
       <i class="fa fa-plus" aria-hidden="true"></i>
@@ -13,9 +13,9 @@
   </ol>
 </section>
 
-<section class="content">
+<section class="content container">
   <div class="row">
-    <div class="panel panel-default col-sm-12 no-padding" ng-repeat="article in articles">
+    <div class="panel panel-default col-sm-8 col-sm-offset-1 no-padding" ng-repeat="article in articles">
       <div class="panel-heading">
         <h2 class="panel-title">{{article.name}}</h2>
           <div class="float-right">
@@ -30,18 +30,17 @@
             </button>
           </div>
       </div>
-      <ul class="nav nav-pills" role="tablist">
-        <li role="presentation" ng-repeat="theme in article.themes"><a href="#">{{theme.name}}</a></li>
-      </ul>
-      <ul class="nav nav-pills" role="tablist">
-        <li role="presentation"><span style="margin-left:15px;">Posté par:</span><a href="#">{{article.user.firstname}} {{article.user.lastname}}</a></li>
-      </ul>
+      <h6 class="card-subtitle mb-2 text-muted">
+        <span class="badge badge-default" ng-repeat="theme in article.themes">{{theme.name}}</span>
+      </h6>
+
       <div class="panel-body">
         {{article.description}}
+      </div>
+      <div class="card-footer text-muted">
+        <span style="margin-left:15px;">Posté par:</span><a href="#">{{article.user.firstname}} {{article.user.lastname}}</a>
       </div>
     </div>
   </div>
 
 </section>
-
-
