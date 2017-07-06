@@ -6,7 +6,7 @@
       <i class="fa fa-plus" aria-hidden="true"></i>
     </button>
   </h1>
-  
+
   <ol class="breadcrumb">
       <li><a><i class="fa fa-dashboard"></i>Dashboard</a></li>
       <li class="active">Articles</li>
@@ -19,7 +19,7 @@
       <div class="panel-heading">
         <h2 class="panel-title">{{article.name}}</h2>
           <div class="float-right">
-            <button type="button" class="btn btn-primary" ng-if="Abonne || Administrateur || Auteur">
+            <button type="button" class="btn btn-primary" ng-if="Abonne || Administrateur || Auteur" ng-click="showAdvanced($event, article.id)">
               <i class="fa fa-search" aria-hidden="true"></i>
             </button>
             <button type="button" class="btn btn-info" ng-if="Administrateur || Auteur">
@@ -32,6 +32,9 @@
       </div>
       <ul class="nav nav-pills" role="tablist">
         <li role="presentation" ng-repeat="theme in article.themes"><a href="#">{{theme.name}}</a></li>
+      </ul>
+      <ul class="nav nav-pills" role="tablist">
+        <li role="presentation"><span style="margin-left:15px;">Posté par:</span><a href="#">{{article.user.firstname}} {{article.user.lastname}}</a></li>
       </ul>
       <div class="panel-body">
         {{article.description}}
