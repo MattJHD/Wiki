@@ -82,4 +82,13 @@ function ($rootScope, $scope, $location, appSettings, $localStorage, $http, $sta
     $scope.Auteur = checkRole(arrayRole, 'Auteur');
     $scope.Abonne = checkRole(arrayRole, 'Abonne');
 
+    if($scope.Auteur){
+        $scope.articlesAuteur = [];
+        for(var i=0;i<$localStorage.currentUser.data.articles.length;i++){
+                $scope.articlesAuteur.push($localStorage.currentUser.data.articles[i].id);
+        }
+    }
+    
+    
+
 }]);

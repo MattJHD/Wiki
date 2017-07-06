@@ -11,9 +11,6 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 			 console.log($scope.articles);
 		});
 
-		
-		
-
 		//datetime
 		function zero(num, size) {
 		    var s = num;
@@ -25,8 +22,6 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 						+ zero((currentdate.getMonth()+1),10)  + "-" 
 						+ zero(currentdate.getDate(), 10);
         console.log(datetimeNow);
-
-
 		
         //CRUD
 		$scope.status = '  ';

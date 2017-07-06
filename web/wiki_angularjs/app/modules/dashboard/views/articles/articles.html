@@ -22,9 +22,10 @@
             <button type="button" class="btn btn-primary" ng-if="Abonne || Administrateur || Auteur" ng-click="showArticle($event, article.id)">
               <i class="fa fa-search" aria-hidden="true"></i>
             </button>
-            <button type="button" class="btn btn-info" ng-if="Administrateur || Auteur" ng-click="editArticle($event, article.id)">
+            <button type="button" class="btn btn-info" ng-repeat="ok in articlesAuteur" ng-if="Administrateur || ok == article.id " ng-click="editArticle($event, article.id)">
               <i class="fa fa-pencil" aria-hidden="true" ></i>
             </button>
+           
             <button type="button" class="btn btn-danger" ng-if="Administrateur">
               <i class="fa fa-trash" aria-hidden="true"></i>
             </button>
