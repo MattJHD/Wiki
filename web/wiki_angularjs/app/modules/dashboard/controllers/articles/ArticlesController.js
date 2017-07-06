@@ -10,6 +10,19 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 			 console.log($scope.articles);
 		});
 
+		//datetime
+		function zero(num, size) {
+		    var s = num;
+		    if (parseInt(s) < parseInt(size)) s = "0" + s;	
+		    return s;
+		}
+		var currentdate = new Date(); 
+		var datetimeNow =  currentdate.getFullYear() + "-"
+						+ zero((currentdate.getMonth()+1),10)  + "-" 
+						+ zero(currentdate.getDate(), 10);
+        console.log(datetimeNow);
+
+        //CRUD
 		$scope.status = '  ';
   		$scope.customFullscreen = true;
 
@@ -88,7 +101,7 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 					dataArticle.id = "";
 					dataArticle.name = thisArticle.name;
 					dataArticle.description = thisArticle.description;
-					dataArticle.date_creation = thisArticle.date_creation;
+					dataArticle.date_creation = datetimeNow;
 					dataArticle.pathname = "";
 					dataArticle.user = {};
 					dataArticle.themes = themes;
@@ -104,7 +117,7 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 				}).success(function(data, status, headers, config, answer){
 					$scope.PostDataResponse = data;
 					console.log($scope.PostDataResponse);
-					location.reload();
+					//location.reload();
 				}).error(function (data, status, header, config) {
 	                $scope.ResponseDetails = "Data: " + data +
 	                    "<hr />status: " + status +
