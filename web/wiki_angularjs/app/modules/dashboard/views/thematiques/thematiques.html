@@ -16,7 +16,7 @@
 
 <section class="content-header">
     <h1 style="width:65%!important; margin-left:7%!important">Thématiques
-      <button type="button" class="flat-button col-sm-9 float-right" ng-if="Administrateur || Auteur" ng-click="addTheme($event)">
+      <button type="button" class="flat-button col-sm-9 float-right" ng-if="Administrateur" ng-click="addTheme($event)">
         Add
       </button>
     </h1>
@@ -36,7 +36,7 @@
             <button type="button" class="btn btn-primary" ng-if="Abonne || Administrateur || Auteur" ng-click="showTheme($event, theme.id)">
               <i class="fa fa-search" aria-hidden="true"></i>
             </button>
-            <button type="button" class="btn btn-info" ng-if="Administrateur || Auteur" ng-click="editTheme($event, theme.id)">
+            <button type="button" class="btn btn-info" ng-if="Administrateur" ng-click="editTheme($event, theme.id)">
               <i class="fa fa-pencil" aria-hidden="true"></i>
             </button>
             <button type="button" class="btn btn-danger" ng-if="Administrateur">
