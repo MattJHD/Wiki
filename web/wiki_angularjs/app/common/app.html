@@ -77,45 +77,68 @@
         </footer>
 </div> -->
 
+
+
 <div class="content-wrapper">
-			<ui-view>
-				<div class="jumbotron">
-					<div class="container">
-						<h1>Wiki'tema</h1>
-						<p>La plateforme de partage d'informations!</p>
-					</div>
-				</div>
-					<div class="container" style="height: auto">
-							<div class="row">
-								<div class="panel panel-default col-sm-10 col-md-5 no-padding">
-									<div class="panel-heading">Article du jour</div>
-									<div class="panel-body">
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-									</div>
-								</div>
+	<ui-view>
+		<div class="jumbotron">
+			<div class="container">
+				<h1>Wiki'tema</h1>
+				<p>La plateforme de partage d'informations!</p>
+			</div>
+        </div>
 
-								<div class="panel panel-default col-sm-10 col-md-4 col-md-offset-1 no-padding">
-									<div class="panel-heading">
-										<h3 class="panel-title">Présentation</h3>
-									</div>
-									<div class="panel-body">
-										Wikitema est un projet d’encyclopédie collective en ligne, universelle, multilingue et fonctionnant sur le principe du wiki. Wikipédia a pour objectif d’offrir un contenu librement réutilisable, objectif et vérifiable, que chacun peut modifier et améliorer.
-Tous les rédacteurs des articles de Wikipédia sont bénévoles. Ils coordonnent leurs efforts au sein d'une communauté collaborative, sans dirigeant.
-Aujourd'hui, Wikipédia en français compte :
-									</div>
-								</div>
-							</div>
+            <div class="container">
+                <div class="row">
+                <div class="col-sm-9 col-sm-offset-1" ng-repeat="article in getPageArticles()|startFrom:currentPageArticles*pageSizePageArticles |  limitTo:pageSizePageArticles | orderBy:'-date_creation'">
+                <div class="panel panel-default  panel--styled">
 
-							<div class="row">
-								<div class="panel panel-default col-sm-10 no-padding">
-									<div class="panel-heading">Comment contribuer</div>
-									<div class="panel-body">
-										Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-									</div>
-								</div>
-							</div>
-					</div>
-			</ui-view>
+                  <div class="panel-heading">
+                    <h2 class="panel-title">{{article.name}}</h2>
+                 </div>
+
+                 <div class="col-sm-12 text-left">
+                   <h5>Themes: <span style="margin: 3px!important;" class="badge badge-default" ng-repeat="theme in article.themes">{{theme.name}}</span></h5>
+                 </div>
+                            <div class="panel-body">
+                                <div class="col-md-12 panelTop">
+
+                                    <div class="col-md-12">
+
+                                        <div ng-bind-html="article.description | cut:true:450:' ...'">{{article.description | cut:true:450:' ...'}}</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12 panelBottom">
+                                    
+                                    <div class="text-left col-sm-4">
+                                        <h5>Auteur: <span class="itemPrice">{{article.user.firstname}} {{article.user.lastname}}</span></h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- pagination -->
+                <div class="text-center spacer">
+                    <button class="btn btn-secondary" ng-disabled="currentPageArticles == 0" ng-click="currentPageArticles=currentPageArticles-1">
+                        Precedent
+                    </button>
+                    {{currentPageArticles+1}}/{{nbPagesArticles()}}
+                    <button class="btn btn-secondary" ng-disabled="currentPageArticles>= getPageArticles().length/pageSizePageArticles - 1" ng-click="currentPageArticles=currentPageArticles+1">
+                        Suivant
+                    </button>
+                </div>
+                <!-- fin pagination -->
+
+
+
+            </div>
+
+
+			
+	</ui-view>
 	</div>
 
 	<footer class="main-footer">

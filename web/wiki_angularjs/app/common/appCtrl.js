@@ -1,5 +1,5 @@
-app.controller("appCtrl", ['$rootScope', '$scope', '$location', 'appSettings', '$localStorage', '$http', '$state',
-function ($rootScope, $scope, $location, appSettings, $localStorage, $http, $state) {
+app.controller("appCtrl", ['$rootScope', '$scope', '$location', 'appSettings', '$localStorage', '$http', '$state', '$filter',
+function ($rootScope, $scope, $location, appSettings, $localStorage, $http, $state, $filter) {
 
     $rootScope.theme = appSettings.theme;
 
@@ -10,6 +10,25 @@ function ($rootScope, $scope, $location, appSettings, $localStorage, $http, $sta
 
     $scope.userName =  $localStorage.currentUser.data.username;
     console.log($localStorage.currentUser);
+
+    var backend = appSettings.backend;
+    $http.get(backend + "articles").then(function(response){
+        $scope.articles = response.data;
+
+        /*pagination*/
+        $scope.currentPageArticles= 0;
+        $scope.pageSizePageArticles = 5;
+        
+        $scope.getPageArticles = function () {
+          return $filter('filter')($scope.articles);
+        };
+         
+        $scope.nbPagesArticles = function(){
+            return Math.ceil($scope.articles.length/$scope.pageSizePageArticles);                
+        };      
+    });
+
+
 
     $scope.appTitle = [
         {

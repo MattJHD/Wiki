@@ -32,13 +32,14 @@ dashboard.config(["stateHelperProvider", "cfpLoadingBarProvider", function(state
 		controller: 'UtilisateursController'
 	});
 
-	// stateHelperProvider.state({
-	// 	name: 'app.administration',
-	// 	url: '/administration',
-	// 	templateUrl: 'app/modules/dashboard/views/administration/administration.html',
-	// 	controller: 'AdministrationController'
-	// });
-
 
 
 }]);
+
+dashboard.filter('startFrom', function(){
+	return function(input, start) {
+	 	if (!input || !input.length) { return; }
+        start = +start; //parse to int
+        return input.slice(start);
+    }
+});
