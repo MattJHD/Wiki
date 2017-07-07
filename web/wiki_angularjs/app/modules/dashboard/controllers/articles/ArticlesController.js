@@ -1,5 +1,5 @@
-dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$mdDialog', '$localStorage', 'textAngularManager',
-	function($scope, $http, appSettings, $mdDialog, $localStorage, textAngularManager){
+dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$mdDialog', '$localStorage', 'textAngularManager', '$filter',
+	function($scope, $http, appSettings, $mdDialog, $localStorage, textAngularManager, $filter){
 
 		var backend = appSettings.backend;
 		//console.log($localStorage);
@@ -9,9 +9,21 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 		$http.get(backend + "articles").then(function(response){
 			 $scope.articles = response.data;
 			 console.log($scope.articles);
+
+			 /*pagination*/
+	        $scope.currentPageArticles= 0;
+	        $scope.pageSizePageArticles = 5;
+	        
+	        $scope.getPageArticles = function () {
+	          return $filter('filter')($scope.articles);
+	        };
+	         
+	        $scope.nbPagesArticles = function(){
+	            return Math.ceil($scope.articles.length/$scope.pageSizePageArticles);                
+	        };
 		});
 
-		
+
 
 		//datetime
 		function zero(num, size) {
@@ -108,6 +120,7 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 							dataArticle.name = thisArticle.name;
 							dataArticle.description = thisArticle.description;
 							dataArticle.date_creation = datetimeNow;
+							//dataArticle.media = thisArticle.media;
 							dataArticle.pathname = "";
 							dataArticle.user = currentUserData;
 							dataArticle.themes = themes;

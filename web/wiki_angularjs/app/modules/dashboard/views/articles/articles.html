@@ -62,7 +62,7 @@
 
 <div class="container">
 		<div class="row">
-			<div class="col-sm-9 col-sm-offset-1" ng-repeat="article in articles">
+			<div class="col-sm-9 col-sm-offset-1" ng-repeat="article in getPageArticles()|startFrom:currentPageArticles*pageSizePageArticles |  limitTo:pageSizePageArticles | orderBy:'-date_creation'">
 				<div class="panel panel-default  panel--styled">
           <div class="panel-heading">
             <h2 class="panel-title">{{article.name}}</h2>
@@ -104,4 +104,17 @@
 				</div>
 			</div>
 		</div>
+
+		<!-- pagination -->
+        <div class="text-center spacer">
+            <button class="btn btn-secondary" ng-disabled="currentPageArticles == 0" ng-click="currentPageArticles=currentPageArticles-1">
+                Precedent
+            </button>
+            {{currentPageArticles+1}}/{{nbPagesArticles()}}
+            <button class="btn btn-secondary" ng-disabled="currentPageArticles>= getPageArticles().length/pageSizePageArticles - 1" ng-click="currentPageArticles=currentPageArticles+1">
+                Suivant
+            </button>
+        </div>
+        <!-- fin pagination -->
+		
     </div>

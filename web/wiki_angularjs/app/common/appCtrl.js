@@ -17,7 +17,7 @@ function ($rootScope, $scope, $location, appSettings, $localStorage, $http, $sta
 
         /*pagination*/
         $scope.currentPageArticles= 0;
-        $scope.pageSizePageArticles = 5;
+        $scope.pageSizePageArticles = 3;
         
         $scope.getPageArticles = function () {
           return $filter('filter')($scope.articles);
@@ -44,11 +44,11 @@ function ($rootScope, $scope, $location, appSettings, $localStorage, $http, $sta
             icon: "archive",
             state: "articles"
         },
-        {
-            title: "Médias",
-            icon: "television",
-            state: "medias"
-        },
+        // {
+        //     title: "Médias",
+        //     icon: "television",
+        //     state: "medias"
+        // },
         {
             title: "Thématiques",
             icon: "edit",
