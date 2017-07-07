@@ -32,6 +32,13 @@ dashboard.config(["stateHelperProvider", "cfpLoadingBarProvider", function(state
 		controller: 'UtilisateursController'
 	});
 
+	stateHelperProvider.state({
+		name: 'app.contact',
+		url: '/contact',
+		templateUrl: 'app/modules/dashboard/views/contact/contact.html',
+		controller: 'ContactController'
+	});
+
 
 
 }]);

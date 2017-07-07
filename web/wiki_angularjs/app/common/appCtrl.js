@@ -58,6 +58,11 @@ function ($rootScope, $scope, $location, appSettings, $localStorage, $http, $sta
             title: "Utilisateurs",
             icon: "users",
             state: "utilisateurs"
+        },
+        {
+            title: "Contact",
+            icon: "envelope",
+            state: "contact"
         }
     ];
 

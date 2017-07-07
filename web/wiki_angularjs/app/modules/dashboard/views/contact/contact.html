@@ -1,0 +1,44 @@
+<div class="loader"></div>
+<div class="container">
+    <div class="col-sm-6 col-sm-offset-3">
+      <div class="page-header col-sm-12">
+        <h1>Wiki'tema Contact Form</h1>
+      </div>
+      <form name="userForm" ng-submit="submitForm(user)" novalidate>
+      <!--first-name-->
+        <div ng-class="{ 'has-error' : userForm.firstname.$invalid && !userForm.firstname.$pristine }" class="form-group col-sm-6">
+          <label>first name</label>
+          <input type="text" name="firstname" ng-model="user.firstname" required="required" class="form-control" placeholder="First Name"/>
+          <p ng-show="userForm.firstname.$invalid && !userForm.firstname.$pristine" class="help-block">Your first name is required</p>
+        </div>
+      <!--last-name-->
+        <div ng-class="{ 'has-error' : userForm.lastname.$invalid && !userForm.lastname.$pristine }" class="form-group col-sm-6">
+          <label>last name</label>
+          <input type="text" name="lastname" ng-model="user.lastname" required="required" class="form-control" placeholder="Last Name"/>
+          <p ng-show="userForm.lastname.$invalid && !userForm.lastname.$pristine" class="help-block">Your name is required</p>
+        </div>
+      <!--email-->
+        <div ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }" class="form-group col-sm-12">
+          <label>email</label>
+          <input type="email" name="email" ng-model="user.email" required="required" class="form-control" placeholder="Email"/>
+          <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+        </div>  
+      <!--message-->
+        <div ng-class="{ 'has-error' : userForm.message.$invalid && !userForm.message.$pristine }" class="form-group col-sm-12">
+          <label>message</label>
+          <textarea type="text" name="message" ng-model="user.message" required="required" class="form-control" rows="3"></textarea>
+        </div>
+      <!--Radio-->
+        <div class="form-group col-sm-12">
+          <label>subscribe to newsletter</label><br />
+          <label class="radio-inline"><input type="radio" name="newsletter" ng-model="newsletter" id="yes" value="yes" checked>Yes</label>
+          <label class="radio-inline"><input type="radio" name="newsletter" ng-model="newsletter" id="no" value="no">No</label>          
+        </div>
+        <!--submit-->
+        <div class="col-sm-12">
+          <button type="submit" ng-disabled="userForm.$invalid" class="btn btn-primary">Submit</button>
+          <label ng-show="userForm.$valid" ng-hide="userForm.$invalid"></label>
+        </div>
+      </form>
+    </div>
+  </div>
