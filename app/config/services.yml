@@ -17,3 +17,8 @@ services:
             - '@mailer'
             - '%mailer_from_email%'
             - '%mailer_to_email%'
+            
+   app.upload.file:
+        class: WikiBundle\Upload\UploadFile
+        arguments:
+            - '%kernel.root_dir%'

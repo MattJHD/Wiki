@@ -43,6 +43,7 @@ class Article {
 
     /**
      * @var null|UploadedFile
+     * @Type("string")
      */
     private $media;
 
