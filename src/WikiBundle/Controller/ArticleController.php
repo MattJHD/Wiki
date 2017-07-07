@@ -65,7 +65,7 @@ class ArticleController extends Controller{
       if(count($errors) == 0){
         $em = $this->getDoctrine()->getManager();
         
-        $this->get('app.upload.file')->uploadArticle($article);
+        //$this->get('app.upload.file')->uploadArticle($article);
         
         $em->getRepository(Article::class)->createArticle($em, $article, $currentUser);
         // We associate Themes to the new Article

@@ -47,8 +47,8 @@ class UploadFile
                         }else{
                             $filename = basename($webPath . $currentPath);
                         }
-//                        dump($file->getClientOriginalExtension());
-//                        die();
+                        dump($file);
+                        die();
 
                         $file->move($imgPath, $filename);
 

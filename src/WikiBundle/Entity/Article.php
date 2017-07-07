@@ -49,7 +49,7 @@ class Article {
 
     /**
      * @var null|string
-     * @ORM\Column(nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * @Type("string")
      */
     private $pathname;
