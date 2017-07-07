@@ -161,7 +161,7 @@ dashboard.controller("ThematiquesController", ['$scope', '$http', 'appSettings',
 									$scope.PostDataResponse = data;
 									console.log($scope.PostDataResponse);
 
-									//location.reload();
+									location.reload();
 								}).error(function (data, status, header, config) {
 					                $scope.ResponseDetails = "Data: " + data +
 					                    "<hr />status: " + status +
