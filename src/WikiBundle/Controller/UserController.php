@@ -92,7 +92,7 @@ class UserController extends Controller{
       // We call the function to create a user
       $em->getRepository(User::class)->createUser($em, $user, $password);
 
-      //$this->get('mailer.contact_mailer')->sendPwd($user);
+      $this->get('mailer.contact_mailer')->sendConfirm($user);
 
       return new JsonResponse("OK");
     }else{
