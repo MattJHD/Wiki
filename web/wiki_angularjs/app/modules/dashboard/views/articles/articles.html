@@ -92,7 +92,7 @@
                 <button type="button" class="btn btn-info" ng-if="Administrateur || ok == article.id" ng-if="Administrateur" ng-click="editArticle($event, article.id)">
                   <i class="fa fa-pencil" aria-hidden="true" ></i>
                 </button>
-                <button type="button" class="btn btn-danger" ng-if="Administrateur">
+                <button type="button" class="btn btn-danger" ng-if="Administrateur" ng-click="deleteArticle(article.id);">
                   <i class="fa fa-trash" aria-hidden="true"></i>
                 </button>
 							</div>
@@ -116,5 +116,5 @@
             </button>
         </div>
         <!-- fin pagination -->
-		
+
     </div>

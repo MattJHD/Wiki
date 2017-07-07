@@ -180,7 +180,26 @@ dashboard.controller("ThematiquesController", ['$scope', '$http', 'appSettings',
 		});
 
 	    
+        /*suppression theme*/
+		$scope.deleteTheme = function(id){
 
+			var confirmDelete = confirm('Voulez-vous vraiment supprimer cette ressource?');
+
+			if(confirmDelete){
+				$http.post(backend + "themes/delete/" + id).success(function(data, status, headers, config){
+
+					location.reload();
+
+				}).error(function (data, status, header, config) {
+	                $scope.ResponseDetails = "Data: " + data +
+	                    "<hr />status: " + status +
+	                    "<hr />headers: " + header +
+	                    "<hr />config: " + config;
+	            });
+
+			};
+			
+		};
 
 
 

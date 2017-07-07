@@ -27,6 +27,7 @@
             <ul class="list-group">
               <li class="list-group-item">Date: {{article.date_creation}}</li>
               <li class="list-group-item">Auteur: {{article.user.firstname}} {{article.user.lastname}}</li>
+              <li class="list-group-item"><img width="200px" data-ng-src="{{article.pathname}}"</li>
               <li class="list-group-item">Thème(s): <strong ng-repeat="theme in article.themes">{{theme.name}} - </strong></li>
             </ul>
           </div>

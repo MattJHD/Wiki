@@ -193,4 +193,25 @@ dashboard.controller("UtilisateursController", ['$scope', '$http', 'appSettings'
 
     };
 
+    /*suppression utilisateur*/
+		$scope.deleteUtilisateur = function(id){
+
+			var confirmDelete = confirm('Voulez-vous vraiment supprimer cette ressource?');
+
+			if(confirmDelete){
+				$http.post(backend + "users/delete/" + id).success(function(data, status, headers, config){
+
+					location.reload();
+
+				}).error(function (data, status, header, config) {
+	                $scope.ResponseDetails = "Data: " + data +
+	                    "<hr />status: " + status +
+	                    "<hr />headers: " + header +
+	                    "<hr />config: " + config;
+	            });
+
+			};
+			
+		};
+
 }]);

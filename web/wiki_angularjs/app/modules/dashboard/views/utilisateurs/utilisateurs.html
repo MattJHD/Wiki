@@ -31,7 +31,7 @@
            <button type="button" class="btn btn-info" ng-if="Administrateur" ng-click="editUser($event, user.id)">
              <i class="fa fa-pencil" aria-hidden="true"></i>
            </button>
-           <button type="button" class="btn btn-danger" ng-if="Administrateur">
+           <button type="button" class="btn btn-danger" ng-if="Administrateur" ng-click="deleteUtilisateur(user.id);">
              <i class="fa fa-trash" aria-hidden="true"></i>
            </button>
          </div>

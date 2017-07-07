@@ -121,7 +121,7 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 							dataArticle.description = thisArticle.description;
 							dataArticle.date_creation = datetimeNow;
 							//dataArticle.media = thisArticle.media;
-							dataArticle.pathname = "";
+							dataArticle.pathname = thisArticle.media;
 							dataArticle.user = currentUserData;
 							dataArticle.themes = themes;
 
@@ -136,7 +136,7 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 						}).success(function(data, status, headers, config, answer){
 							$scope.PostDataResponse = data;
 							console.log($scope.PostDataResponse);
-							location.reload();
+							//location.reload();
 						}).error(function (data, status, header, config) {
 			                $scope.ResponseDetails = "Data: " + data +
 			                    "<hr />status: " + status +
@@ -199,7 +199,7 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 							dataArticle.name = thisArticle.name;
 							dataArticle.description = thisArticle.description;
 							dataArticle.date_creation = thisArticle.date_creation;
-							dataArticle.pathname = "";
+							dataArticle.pathname = thisArticle.media;
 							dataArticle.user = currentUserData;
 							dataArticle.themes = themes;
 
@@ -233,6 +233,27 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 
 
 		})
+
+		/*suppression article*/
+		$scope.deleteArticle= function(id){
+
+			var confirmDelete = confirm('Voulez-vous vraiment supprimer cette ressource?');
+
+			if(confirmDelete){
+				$http.post(backend + "articles/delete/" + id).success(function(data, status, headers, config){
+
+					location.reload();
+
+				}).error(function (data, status, header, config) {
+	                $scope.ResponseDetails = "Data: " + data +
+	                    "<hr />status: " + status +
+	                    "<hr />headers: " + header +
+	                    "<hr />config: " + config;
+	            });
+
+			};
+			
+		};
 
     
 
