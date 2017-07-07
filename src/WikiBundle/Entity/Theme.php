@@ -25,8 +25,8 @@ class Theme {
     private $name;
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="theme", cascade={"persist", "merge"})
-     * @Type("WikiBundle\Entity\Theme")
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="themes", cascade={"persist", "merge"})
+     * @Type("WikiBundle\Entity\User")
      */
     private $user;
 

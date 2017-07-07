@@ -78,6 +78,11 @@ class User implements UserInterface
      */
     private $articles;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Theme", mappedBy="user", cascade={"persist", "remove", "merge"})
+     * @Type("WikiBundle\Entity\Theme")
+     */
+    private $themes;
 
     public function __construct() {
        $this->salt=md5(time());
@@ -124,6 +129,10 @@ class User implements UserInterface
         return $this->articles;
     }
 
+    function getThemes() {
+        return $this->themes;
+    }
+
     //SETTER
     function setId($id) {
         $this->id = $id;
@@ -163,6 +172,10 @@ class User implements UserInterface
 
     function setArticles($articles) {
         $this->articles = $articles;
+    }
+
+    function setThemes($themes) {
+        $this->themes = $themes;
     }
 
 

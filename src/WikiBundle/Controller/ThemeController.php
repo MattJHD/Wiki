@@ -30,6 +30,8 @@ class ThemeController extends Controller{
     $themes = $em->getRepository(Theme::class)->getAllThemes();
     $data = $serializer->serialize($themes, 'json');
 
+    // dump($data);
+    // die();
     return new Response($data);
   }
 
@@ -45,6 +47,8 @@ class ThemeController extends Controller{
         return new JsonResponse(['message' => 'Theme not found'], Response::HTTP_NOT_FOUND);
     }
     $data = $serializer->serialize($theme, 'json');
+    // dump($data);
+    // die();
 
     return new Response($data);
   }
