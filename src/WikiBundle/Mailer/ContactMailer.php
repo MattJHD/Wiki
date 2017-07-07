@@ -61,6 +61,31 @@ class ContactMailer
 
     }
 
+    public function sendConfirm(User $user)
+    {
+        $message = \Swift_Message::newInstance();
+            
+            $appPath = $this->kernelRootDir;
+             
+            
+            $bodyTxt = $this->templating->render('email/confirm.txt.twig',[
+                'user'=>$user,
+            ]);
+            
+            $bodyHtml = $this ->templating->render('email/confirm.html.twig',[
+                'user'=>$user,
+            ]);
+                    
+            $message 
+                        ->setFrom($this->mailerFromEmail)
+                        ->setTo($this->mailerToEmail)
+                        ->setSubject('Confirmation de création de compte')
+                        ->setBody($bodyTxt, 'text/plain')
+                        ->addPart($bodyHtml, 'text/html');
+            
+            return $this->mailer->send($message);
+
+    }
 
 
     public function sendMail($name, $firstName, $email, $body)
