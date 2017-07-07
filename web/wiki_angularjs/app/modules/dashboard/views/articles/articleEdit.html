@@ -10,12 +10,12 @@
                           </md-button>
                         </div>
                     </md-toolbar>
-                    <md-dialog-content class="spacer" ng-repeat="article in thisArticle"> 
+                    <md-dialog-content ng-repeat="article in thisArticle">
 
-                        <form name="articleForm" novalidate >  
+                        <form name="articleForm" novalidate >
                         <div class="col-xs-12">
                             <div class="form-group">
-                                <label for="name">name</label><input class="form-control" name="pname" type="text" ng-model="article.name" required >                  
+                                <label for="name">name</label><input class="form-control" name="pname" type="text" ng-model="article.name" required >
                                 <div class="has-error" ng-show="articleForm.$dirty">
                                     <span ng-show="articleForm.pname.$error.required">Ce champs est obligatoire!</span>
                                 </div>
@@ -33,15 +33,15 @@
                                     <option ng-repeat="theme in themes" value="{{theme}}" >
                                         {{theme.name}}
                                     </option>
-                                </select>   
+                                </select>
                             </div>
                         </div>
 
                         <md-dialog-actions layout="row">
-                        
+
                             <span flex></span>
                             <button type="submit" class="btn btn-warning" ng-click="goEdit(article);">Modifier</button>
-                      
+
                         </md-dialog-actions>
 
 
@@ -49,8 +49,8 @@
 
                     </md-dialog-content>
 
-                      
-                    
+
+
                 </md-dialog>
             </div>
             <!-- fin form edit user-->

@@ -168,6 +168,9 @@ html{
   .md-dialog-container {
     left: 10%!important;
     z-index: 9999!important;
+    overflow: scroll!important;
+    top: 20px!important;
+    height: 100%!important;
   }
 /* END MODIFS */
 /* Layout */
