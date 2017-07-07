@@ -136,7 +136,7 @@ dashboard.controller("ArticlesController", ['$scope', '$http', 'appSettings', '$
 						}).success(function(data, status, headers, config, answer){
 							$scope.PostDataResponse = data;
 							console.log($scope.PostDataResponse);
-							//location.reload();
+							location.reload();
 						}).error(function (data, status, header, config) {
 			                $scope.ResponseDetails = "Data: " + data +
 			                    "<hr />status: " + status +
